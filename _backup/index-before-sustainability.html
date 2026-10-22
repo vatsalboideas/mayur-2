@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mayur Uniquoters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap">
+<style>
+/* Layout: 1792px content grid inside 64px gutters; one fixed WebGL "coated fabric" surface behind every section,
+   re-tinted per section (paper → ink → sand → maroon) as you scroll. Figtree only, Mayur type scale from Figma. */
+:root{
+  --paper:#F4F2EE; --sand:#E9E5DF; --card:#E6E1DA; --ink:#141213; --ink-soft:#1C1819;
+  --muted:#77716D; --stone:#C9C3BD; --cream:#F4EEE6; --maroon:#84000C;
+  --rule:rgba(20,18,19,.12);
+  --f:'Figtree',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  /* type scale (Figma text styles) */
+  --display:clamp(52px,7.5vw,144px); --h1:clamp(48px,5.83vw,112px); --h2:clamp(40px,3.33vw,64px);
+  --h3:clamp(24px,2.08vw,40px); --h4:clamp(20px,1.46vw,28px); --bl:clamp(17px,1.04vw,20px); --bm:16px; --lab:13px;
+  --gut:clamp(16px,3.33vw,64px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f);font-size:var(--bm);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:2px solid var(--maroon);outline-offset:4px;border-radius:4px}
+img{display:block;max-width:100%}
+
+/* ---- type styles ---- */
+.display{font-size:var(--display);line-height:.92;letter-spacing:-.04em;font-weight:400;margin:0}
+.h1{font-size:var(--h1);line-height:1;letter-spacing:-.035em;font-weight:400;margin:0;text-wrap:balance}
+.h2{font-size:var(--h2);line-height:1.05;letter-spacing:-.025em;font-weight:400;margin:0}
+.h3{font-size:var(--h3);line-height:1.22;letter-spacing:-.015em;font-weight:400;margin:0;text-wrap:balance}
+.h4{font-size:var(--h4);line-height:1.3;letter-spacing:-.01em;font-weight:400;margin:0}
+.bl{font-size:var(--bl);line-height:1.55;letter-spacing:-.002em;margin:0}
+.bm{font-size:var(--bm);line-height:1.55;margin:0}
+.eyebrow{display:inline-flex;align-items:center;gap:11px;font-size:var(--lab);font-weight:500;letter-spacing:.08em;text-transform:uppercase;line-height:1.4}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--maroon);flex:none}
+.cap{font-size:var(--lab);font-weight:500;line-height:1.4;font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.dark .muted{color:rgba(244,238,230,.62)}
+
+/* ---- buttons (Figma components) ---- */
+.btn{display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 28px;border-radius:999px;font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .4s,color .4s,border-color .4s;position:relative;overflow:hidden;white-space:nowrap}
+.btn .arr{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.btn:hover .arr{transform:translateX(5px)}
+.btn--primary{background:var(--ink);color:var(--cream)}
+.btn--primary:hover{background:var(--maroon)}
+.btn--ondark{border:1px solid rgba(244,238,230,.5);color:var(--cream)}
+.btn--ondark:hover{background:var(--cream);color:var(--ink)}
+.link{display:inline-flex;gap:12px;align-items:center;font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:8px 0;border-bottom:1px solid currentColor}
+.link:hover .arr{transform:translateX(5px)}.link .arr{transition:transform .4s}
+.icon-btn{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(20,18,19,.3);transition:background .3s,color .3s}
+.icon-btn--solid{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.icon-btn:hover{background:var(--maroon);border-color:var(--maroon);color:var(--cream)}
+.chip{height:48px;padding:0 20px;border-radius:999px;border:1px solid rgba(20,18,19,.25);font-size:16px;font-weight:500;transition:background .3s,color .3s,border-color .3s}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.chip:not([aria-pressed="true"]):hover{border-color:var(--ink)}
+
+/* ---- webgl ---- */
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
+main,header.site,footer{position:relative;z-index:1}
+.no-webgl section[data-bg]{background:var(--sec-bg)}
+
+
+/* ---- header ---- */
+header.site{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 24px) max(var(--gut),env(safe-area-inset-right,0px)) 22px max(var(--gut),env(safe-area-inset-left,0px));display:flex;align-items:center;justify-content:space-between;gap:24px;transition:transform .6s cubic-bezier(.2,.7,.2,1),background .4s,color .4s}
+header.site.is-hidden{transform:translateY(-100%)}
+header.site.is-solid{background:rgba(244,242,238,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+header.site.on-dark{color:var(--cream)}
+header.site.on-dark.is-solid{background:rgba(20,18,19,.6)}
+.logo{display:flex;flex-direction:column;line-height:1;gap:4px}
+.logo b{font-weight:500;font-size:26px;letter-spacing:.18em}
+.logo small{font-size:9px;letter-spacing:.42em;text-transform:uppercase;opacity:.75}
+.nav{display:flex;gap:clamp(18px,2.1vw,40px)}
+.nav a{position:relative;font-size:16px;opacity:.6;transition:opacity .3s}
+.nav a:hover,.nav a.active{opacity:1}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.nav a:hover::after,.nav a.active::after{transform:scaleX(1)}
+.hdr-right{display:flex;align-items:center;gap:20px;font-weight:500}
+.menu-btn{display:none;font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-size:14px}
+.mobile-nav{position:fixed;inset:0;z-index:49;background:var(--ink);color:var(--cream);display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:96px max(var(--gut),env(safe-area-inset-right,0px)) max(40px,env(safe-area-inset-bottom,0px)) max(var(--gut),env(safe-area-inset-left,0px))}
+.mobile-nav a{font-size:clamp(32px,9vw,48px);letter-spacing:-.025em;line-height:1.15}
+@media (max-width:1100px){.nav{display:none}.menu-btn{display:block}.hdr-right .lang{display:none}}
+
+/* ---- sections ---- */
+.wrap{padding-left:max(var(--gut),env(safe-area-inset-left,0px));padding-right:max(var(--gut),env(safe-area-inset-right,0px))}
+section{position:relative}
+.dark{color:var(--cream)}
+.rule{height:1px;background:var(--rule);transform-origin:left}
+.dark .rule{background:rgba(244,238,230,.15)}
+.sec-head{display:grid;grid-template-columns:1fr minmax(0,596px);gap:40px 64px;align-items:end}
+.sec-head .left{display:flex;flex-direction:column;gap:28px}
+@media (max-width:900px){.sec-head{grid-template-columns:1fr}}
+.line-mask{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.line-mask>span{display:block;will-change:transform}
+.ph{background:var(--card);background-size:cover;background-position:center;position:relative;overflow:hidden}
+.ph.has-img{background-color:transparent}
+.ph .lab{position:absolute;left:16px;bottom:14px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);opacity:.7}
+.ph.has-img .lab{display:none}
+.dark .ph{background-color:#2a2526}
+
+/* 01 hero */
+.hero{min-height:max(720px,100svh);padding-top:clamp(120px,15vh,170px);padding-bottom:40px;display:flex;flex-direction:column;overflow:hidden}
+.hero .display{position:relative;z-index:3;max-width:13.5ch}
+.hero-stage{position:absolute;inset:0;pointer-events:none;z-index:2}
+.hero-stage .cut{position:absolute;background-size:contain;background-repeat:no-repeat;background-position:center bottom;will-change:transform}
+.cut.sofa{width:75.5vw;aspect-ratio:1450/1130;left:15.6%;bottom:0;background-position:center top}
+.cut.plant{width:18.75vw;aspect-ratio:360/504;right:2.1%;bottom:0;background-position:center top}
+.cut.table{width:15.6vw;aspect-ratio:1;left:1.56%;bottom:8.6%}
+.hero-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;position:relative;z-index:3;gap:24px}
+.hero-foot .scroll{display:flex;flex-direction:column;gap:12px}
+.hero-foot .scroll .rule{width:240px;background:rgba(28,24,25,.25)}
+.hero-sub{position:relative;z-index:3;margin-top:40px;max-width:420px}
+@media (max-width:900px){.cut.sofa{width:118vw;left:-4%}.cut.plant{width:30vw;right:-2%}.cut.table{width:28vw;bottom:18%}}
+
+/* 02 about */
+.about{padding-block:clamp(80px,10vw,160px)}
+.about-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1000px);gap:48px 64px;margin-top:48px}
+.about .stmt .w{opacity:.14;transition:none}
+.about-imgs{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:clamp(80px,9vw,165px)}
+.about-imgs .ph{aspect-ratio:430/560;border-radius:4px}
+.about-imgs .ph:nth-child(even){margin-top:120px}
+@media (max-width:900px){.about-top{grid-template-columns:1fr}.about-imgs{grid-template-columns:repeat(2,1fr);gap:12px}.about-imgs .ph:nth-child(even){margin-top:48px}}
+
+/* 03 sticky split */
+.split{height:300vh}
+.split-pin{height:100vh;height:100svh;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,1fr);gap:clamp(32px,3.4vw,64px);align-items:center;padding-top:96px;padding-bottom:48px}
+.split-list{display:flex;flex-direction:column;gap:6px;align-self:start;margin-top:4vh}
+.split-list button{display:flex;align-items:center;gap:24px;text-align:left;font-size:clamp(48px,5vw,112px);line-height:1.08;letter-spacing:-.035em;color:var(--stone);transition:color .5s}
+.split-list button .ar{font-size:var(--h2);color:var(--maroon);opacity:0;transform:translateX(-20px);transition:opacity .5s,transform .5s;width:.75em;flex:none}
+.split-list button.on{color:var(--ink)}
+.split-list button.on .ar{opacity:1;transform:none}
+.split-copy{position:relative;align-self:stretch;display:flex;flex-direction:column;justify-content:space-between;padding-block:4vh}
+.split-copy .slides{position:relative;min-height:16em}
+.split-copy .slide{position:absolute;inset:0 0 auto 0;display:flex;flex-direction:column;gap:28px}
+.split-img{height:min(80vh,880px);border-radius:16px}
+.split-img .layer{position:absolute;inset:0;background-size:cover;background-position:center;clip-path:inset(100% 0 0 0)}
+.split-img .layer:first-child{clip-path:inset(0)}
+@media (max-width:1100px){.split{height:auto}.split-pin{height:auto;grid-template-columns:1fr;gap:40px;padding-block:96px}.split-img{height:60vh}.split-copy .slides{min-height:0}.split-copy .slide{position:relative;margin-bottom:32px}.split-list{display:none}}
+
+/* 04 values */
+.values{padding-block:clamp(80px,8vw,140px)}
+.val-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:clamp(64px,8vw,160px)}
+.val{display:flex;flex-direction:column;gap:24px;padding-top:24px;position:relative}
+.val .rule{position:absolute;top:0;left:0;right:0}
+.val .vi{width:64px;height:64px;object-fit:contain;object-position:left center;margin-block:40px 24px;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.val:hover .vi{transform:translateY(-6px)}
+@media (max-width:1100px){.val-grid{grid-template-columns:repeat(3,1fr);row-gap:48px}}
+@media (max-width:560px){.val-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* 05 history */
+.history{overflow:hidden;background:rgba(20,18,19,.9)}
+.hist-pin{cursor:grab;user-select:none;-webkit-user-select:none;touch-action:pan-y;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-block:120px 64px;gap:clamp(48px,6vw,96px)}
+.hist-pin.grabbing{cursor:grabbing}
+.hist-track{display:flex;gap:40px;width:max-content;will-change:transform}
+.mile{width:min(700px,80vw);flex:none;border-radius:20px;background:#1E1A1B;border:1px solid rgba(244,238,230,.08);padding:20px;display:flex;flex-direction:column;gap:30px}
+.mile .ph{aspect-ratio:660/360;border-radius:12px}
+.mile .ph .inner{position:absolute;inset:-10% -10%;background:inherit;background-size:cover;background-position:center}
+.mile-body{display:grid;grid-template-columns:auto minmax(0,340px);gap:20px 48px;align-items:start;padding:0 8px 24px;justify-content:space-between}
+.mile .yr{font-size:var(--h2);line-height:1;letter-spacing:-.025em}
+.hist-bar{position:relative;height:2px;background:rgba(244,238,230,.15)}
+.hist-bar i{position:absolute;inset:0;background:var(--maroon);transform-origin:left;transform:scaleX(.33)}
+.hist-meta{display:flex;justify-content:space-between;align-items:center;gap:20px}
+@media (max-width:900px){.hist-track{width:auto;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px}.mile{scroll-snap-align:start}.mile-body{grid-template-columns:1fr}}
+
+/* 06 founder */
+.founder{height:max(760px,110vh);overflow:hidden;color:var(--cream)}
+.founder .bg{position:absolute;inset:-12% 0;background:#2a2526 center/cover no-repeat;will-change:transform}
+.founder .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,18,19,0) 25%,rgba(20,18,19,.82) 58%,rgba(20,18,19,.92))}
+.founder .content{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,776px);align-items:center}
+.founder .q{display:flex;flex-direction:column;gap:40px}
+.founder .stmt .w{opacity:.18}
+@media (max-width:900px){.founder .content{grid-template-columns:1fr;align-items:end;padding-bottom:80px}.founder .shade{background:linear-gradient(180deg,rgba(20,18,19,.1) 10%,rgba(20,18,19,.92) 55%)}}
+
+/* 07 board */
+.board{padding-block:clamp(100px,8vw,140px)}
+.board-head-r{display:flex;flex-direction:column;gap:32px}
+.board-arrows{display:flex;gap:16px;justify-content:flex-end}
+.board-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:48px;margin-top:clamp(56px,5vw,96px)}
+.bm-card{display:flex;flex-direction:column;gap:24px}
+.bm-card .ph{aspect-ratio:4/5;border-radius:16px;max-width:100%}
+.bm-card .ph .inner{position:absolute;inset:0;background:inherit;background-size:cover;background-position:center top;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.bm-card:hover .ph .inner{transform:scale(1.06)}
+.bm-card .meta{display:flex;flex-direction:column;gap:4px}
+.bm-card .name{font-size:var(--bl);font-weight:500;line-height:1.55}
+@media (max-width:1300px){.board-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:24px;padding-bottom:12px;scrollbar-width:none}.board-row::-webkit-scrollbar{display:none}.bm-card{flex:0 0 min(300px,72vw);scroll-snap-align:start}}
+@media (min-width:1301px){.board-arrows{visibility:hidden}}
+
+/* 08 policies */
+.policies{padding-block:clamp(100px,9vw,180px)}
+.pol-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px}
+.pol-left{display:flex;flex-direction:column;gap:32px}
+.chips{display:flex;flex-wrap:wrap;gap:12px;max-width:760px;margin-top:24px}
+.certs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;perspective:1200px}
+.cert{background:#fff;border-radius:20px;padding:clamp(24px,2.5vw,48px);display:flex;flex-direction:column;gap:clamp(40px,5vw,100px);transform-style:preserve-3d;transition:box-shadow .5s;will-change:transform}
+.cert:hover{box-shadow:0 30px 60px -30px rgba(20,18,19,.35)}
+.cert .ph{aspect-ratio:330/410;background-color:var(--sand);background-size:contain;background-repeat:no-repeat}
+.cert .meta{display:flex;flex-direction:column;gap:6px}
+.cert .name{font-size:var(--bl);font-weight:500}
+.pol-note{display:none}
+@media (max-width:1000px){.pol-grid{grid-template-columns:1fr}}
+@media (max-width:560px){.certs{grid-template-columns:1fr}}
+
+/* 09 investors */
+.investors{padding-block:clamp(80px,7vw,120px)}
+.inv-grid{display:grid;grid-template-columns:minmax(0,760px) minmax(0,1fr);gap:clamp(40px,7.5vw,136px);align-items:stretch}
+.inv-img{aspect-ratio:760/860;border-radius:20px;clip-path:inset(12% 12% 12% 12% round 20px)}
+.inv-img .inner{position:absolute;inset:-12% 0;background:inherit;background-size:cover;background-position:center}
+.inv-copy{display:flex;flex-direction:column;gap:48px;padding-top:60px}
+.inv-copy .cta{margin-top:auto;padding-bottom:120px}
+@media (max-width:900px){.inv-grid{grid-template-columns:1fr}.inv-copy .cta{padding-bottom:0}}
+
+/* 10 customers */
+.customers{padding-block:clamp(80px,7vw,100px) clamp(80px,8vw,160px)}
+.logo-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));grid-auto-rows:clamp(88px,8.4vw,130px);margin-top:clamp(56px,6vw,128px);border-top:1px solid rgba(28,24,25,.12);border-left:1px solid rgba(28,24,25,.12)}
+.logo-cell{min-width:0;min-height:0;height:100%;border-right:1px solid rgba(28,24,25,.12);border-bottom:1px solid rgba(28,24,25,.12);display:flex;align-items:center;justify-content:center;padding:0 12%;overflow:hidden;transition:background .4s}
+.logo-cell:hover{background:rgba(255,255,255,.5)}
+.logo-cell img{display:block;max-height:45%;max-width:100%;width:auto;height:auto;object-fit:contain;filter:grayscale(1);opacity:.75;transition:filter .4s,opacity .4s}
+.logo-cell:hover img{filter:none;opacity:1}
+.marquee{margin-top:clamp(56px,6vw,128px);overflow:hidden;border-block:1px solid rgba(28,24,25,.12);padding-block:36px;white-space:nowrap}
+.marquee .track{display:inline-flex;gap:72px;will-change:transform}
+.marquee span{font-size:var(--h2);letter-spacing:-.025em;color:var(--ink);opacity:.85;display:inline-flex;align-items:center;gap:72px}
+.marquee span::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--maroon)}
+@media (max-width:900px){.logo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* 11 footer */
+footer{color:var(--cream);background:var(--maroon);padding-top:64px;padding-bottom:max(36px,env(safe-area-inset-bottom,0px))}
+.foot-top{display:grid;grid-template-columns:minmax(0,1fr) repeat(3,minmax(0,330px));gap:40px}
+.foot-col{display:flex;flex-direction:column;gap:14px}
+.foot-col h4{margin:0 0 6px;font-size:var(--lab);font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.foot-col a,.foot-col p{font-size:var(--bl);margin:0;opacity:.88}
+.foot-col a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.foot-line{margin-top:clamp(80px,8vw,140px);font-size:var(--h2);line-height:1.05;letter-spacing:-.025em;max-width:22ch}
+.foot-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:36px;padding-top:28px;border-top:1px solid rgba(244,238,230,.2);font-size:16px}
+footer .logo b{font-size:40px}
+@media (max-width:900px){.foot-top{grid-template-columns:1fr 1fr}.foot-top .logo{grid-column:1/-1}}
+
+/* cursor */
+.cursor{position:fixed;left:0;top:0;width:84px;height:84px;margin:-42px 0 0 -42px;opacity:0;scale:.4;transition:opacity .3s,scale .4s cubic-bezier(.2,.7,.2,1);border-radius:50%;background:var(--maroon);z-index:90;pointer-events:none;display:grid;place-items:center;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--cream)}
+.cursor.big{opacity:1;scale:1}
+.cursor span{opacity:0;transition:opacity .25s}.cursor.big span{opacity:1}
+@media (hover:none),(pointer:coarse){.cursor{display:none}}
+
+@media (prefers-reduced-motion:reduce){
+  .about .stmt .w,.founder .stmt .w{opacity:1!important}
+  .split-img .layer{transition:none}
+}
+</style>
+
+
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor" aria-hidden="true"><span>Drag</span></div>
+
+<header class="site" id="hdr">
+  <a href="#top" class="logo" aria-label="Mayur Uniquoters home"><b>MAYUR</b><small>Uniquoters Ltd</small></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="#about" class="active">About</a>
+    <a href="#values">Market Segment</a>
+    <a href="#history">Plants</a>
+    <a href="#customers">Products</a>
+    <a href="#policies">Sustainability</a>
+    <a href="#customers">Global Presence</a>
+    <a href="#investors">News &amp; Media</a>
+  </nav>
+  <div class="hdr-right"><span class="lang">EN&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#contact">Contact</a></span><button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav">Menu</button></div>
+</header>
+<div class="mobile-nav" id="mnav" hidden>
+  <a href="#about">About</a><a href="#values">Values</a><a href="#history">History</a><a href="#board">Board</a><a href="#policies">Sustainability</a><a href="#investors">Investors</a><a href="#contact">Contact</a>
+</div>
+
+<main id="top">
+  <!-- 01 HERO -->
+  <section class="hero wrap" data-fabric="#EAE5DD" data-amp="1" data-bg>
+    <h1 class="display" id="heroTitle">
+      <span class="line-mask"><span>Engineering Material</span></span>
+      <span class="line-mask"><span>Solutions for a</span></span>
+      <span class="line-mask"><span>Changing World.</span></span>
+    </h1>
+    <div class="hero-stage" aria-hidden="true">
+      <div class="cut sofa" data-img="hero-sofa" data-depth="0.6"></div>
+      <div class="cut plant" data-img="hero-plant" data-depth="1.1"></div>
+      <div class="cut table" data-img="hero-table" data-depth="1.4"></div>
+    </div>
+    <div class="hero-foot">
+      <div class="scroll"><div class="rule"></div><span class="cap">Scroll to discover ↓</span></div>
+      <span class="cap muted">Since 1994</span>
+    </div>
+  </section>
+
+  <!-- 02 ABOUT -->
+  <section class="about wrap" id="about" data-fabric="#F1EEE9" data-amp=".45">
+    <div class="rule rv-rule"></div>
+    <div class="about-top">
+      <div style="display:flex;flex-direction:column;gap:40px">
+        <span class="eyebrow">About Us</span>
+        <h2 class="h1 rv-h">About Us</h2>
+      </div>
+      <p class="h3 stmt" data-words>Driven by innovation, advanced manufacturing and responsible practices, we develop high-performance material solutions for the automotive, footwear, furnishing and lifestyle industries, delivering quality that is trusted across global markets.</p>
+    </div>
+    <div class="about-imgs">
+      <div class="ph" data-img="about-1" data-speed="-6"><span class="lab">About image 1</span></div>
+      <div class="ph" data-img="about-2" data-speed="8"><span class="lab">About image 2</span></div>
+      <div class="ph" data-img="about-3" data-speed="-4"><span class="lab">About image 3</span></div>
+      <div class="ph" data-img="about-4" data-speed="10"><span class="lab">About image 4</span></div>
+    </div>
+  </section>
+
+  <!-- 03 VISION / MISSION / VALUES -->
+  <section class="split" id="split" data-fabric="#F1EEE9" data-amp=".35">
+    <div class="split-pin wrap">
+      <div class="split-list" role="tablist" aria-label="Purpose">
+        <button class="on" data-i="0" role="tab"><span class="ar">→</span>Vision</button>
+        <button data-i="1" role="tab"><span class="ar">→</span>Mission</button>
+        <button data-i="2" role="tab"><span class="ar">→</span>Values</button>
+      </div>
+      <div class="split-copy">
+        <div class="slides">
+          <div class="slide"><span class="eyebrow">Vision</span><p class="h4">To be the global leader in our industry through a great customer experience.</p></div>
+          <div class="slide"><span class="eyebrow">Mission</span><p class="bl">Drive profitable growth by providing an excellent customer experience through consistency, high-quality products and services, with great stakeholder relationships, in a sustainable manner.</p></div>
+          <div class="slide"><span class="eyebrow">Values</span><p class="h4">The principles that guide every decision, every partnership and every innovation.</p></div>
+        </div>
+        <span class="cap muted" id="splitCount">01 / 03</span>
+      </div>
+      <div class="split-img ph" aria-hidden="true">
+        <div class="layer" data-img="split"></div>
+        <div class="layer" data-img="about-1"></div>
+        <div class="layer" data-img="about-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 VALUES -->
+  <section class="values wrap" id="values" data-fabric="#EFEBE5" data-amp=".5">
+    <div class="sec-head">
+      <div class="left"><span class="eyebrow">Values</span><h2 class="h1 rv-h">Values</h2></div>
+      <p class="h4">The principles that guide every decision, every partnership and every innovation.</p>
+    </div>
+    <div class="val-grid">
+      <div class="val"><div class="rule"></div><span class="cap muted">01</span>
+        <img class="vi" src="img/icon-1.svg" alt="" width="64" height="64">
+        <h3 class="h4">Customer First</h3></div>
+      <div class="val"><div class="rule"></div><span class="cap muted">02</span>
+        <img class="vi" src="img/icon-2.svg" alt="" width="64" height="64">
+        <h3 class="h4">Innovation</h3></div>
+      <div class="val"><div class="rule"></div><span class="cap muted">03</span>
+        <img class="vi" src="img/icon-3.svg" alt="" width="64" height="64">
+        <h3 class="h4">Quality</h3></div>
+      <div class="val"><div class="rule"></div><span class="cap muted">04</span>
+        <img class="vi" src="img/icon-4.svg" alt="" width="64" height="64">
+        <h3 class="h4">People</h3></div>
+      <div class="val"><div class="rule"></div><span class="cap muted">05</span>
+        <img class="vi" src="img/icon-5.svg" alt="" width="64" height="64">
+        <h3 class="h4">One Team</h3></div>
+      <div class="val"><div class="rule"></div><span class="cap muted">06</span>
+        <img class="vi" src="img/icon-6.svg" alt="" width="64" height="64">
+        <h3 class="h4">Responsibility</h3></div>
+    </div>
+  </section>
+
+  <!-- 05 HISTORY -->
+  <section class="history dark" id="history" data-fabric="#191516" data-amp=".7" data-dark>
+    <div class="hist-pin">
+      <div class="sec-head wrap">
+        <div class="left"><span class="eyebrow">History</span><h2 class="h1 rv-h">History</h2></div>
+        <p class="bl">From a single manufacturing facility in 1994 to a globally trusted material solutions company, our journey has been defined by innovation, expansion and a relentless pursuit of excellence. Every milestone reflects our commitment to creating better products, building stronger partnerships and growing responsibly.</p>
+      </div>
+      <div class="wrap" style="overflow:visible">
+        <div class="hist-track" id="histTrack">
+          <article class="mile"><div class="ph"><div class="inner" data-img="history-1994"></div><span class="lab">1994</span></div>
+            <div class="mile-body"><span class="yr">1994</span><p class="bm">Mayur Uniquoters was founded with its first manufacturing facility in Jaitpura, Jaipur.</p></div></article>
+          <article class="mile"><div class="ph"><div class="inner" data-img="history-1995"></div><span class="lab">1995</span></div>
+            <div class="mile-body"><span class="yr">1995</span><p class="bm">First export shipment, marking the beginning of our global journey.</p></div></article>
+          <article class="mile"><div class="ph"><div class="inner" data-img="history-2012"></div><span class="lab">2012</span></div>
+            <div class="mile-body"><span class="yr">2012</span><p class="bm">Established our wholly owned subsidiary in Texas, USA.</p></div></article>
+        </div>
+      </div>
+      <div class="wrap hist-meta">
+        <div class="hist-bar" style="flex:1"><i id="histBar"></i></div>
+        <span class="cap" style="letter-spacing:.08em;text-transform:uppercase">Drag / scroll&nbsp;&nbsp;→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 FOUNDER -->
+  <section class="founder" id="founder" data-fabric="#191516" data-amp=".5" data-dark>
+    <div class="bg" data-img="founder"></div>
+    <div class="shade"></div>
+    <div class="content wrap">
+      <div></div>
+      <div class="q">
+        <span class="eyebrow">Founder’s Message</span>
+        <blockquote class="h3 stmt" data-words style="margin:0">“When we started Mayur Uniquoters in 1994, our vision was simple: to create products that customers could rely on and relationships that would stand the test of time. Over the years, that vision has grown into a global enterprise built on quality, innovation and trust.”</blockquote>
+        <div><p class="bl" style="font-weight:500">Suresh Kumar Poddar</p><p class="bm muted">Chairman &amp; Managing Director</p></div>
+        <div><a class="btn btn--ondark" href="#founder">Read More <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 BOARD -->
+  <section class="board wrap" id="board" data-fabric="#F1EEE9" data-amp=".4">
+    <div class="sec-head">
+      <div class="left"><span class="eyebrow">Board Members</span><h2 class="h1 rv-h">Board Members</h2></div>
+      <div class="board-head-r">
+        <p class="bl muted">Guided by experienced leadership and strong governance, our Board brings together diverse expertise to steer Mayur Uniquoters towards sustainable growth, operational excellence and long-term value creation.</p>
+        <div class="board-arrows"><button class="icon-btn" id="bPrev" aria-label="Previous board member">←</button><button class="icon-btn icon-btn--solid" id="bNext" aria-label="Next board member">→</button></div>
+      </div>
+    </div>
+    <div class="board-row" id="boardRow">
+      <article class="bm-card"><div class="ph"><div class="inner" data-img="board-1"></div></div><div class="meta"><span class="name">Suresh Kumar Poddar</span><span class="bm muted">Chairman &amp; Managing Director</span></div></article>
+      <article class="bm-card"><div class="ph"><div class="inner" data-img="board-2"></div></div><div class="meta"><span class="name">Arun Bagaria</span><span class="bm muted">Whole Time Executive Director</span></div></article>
+      <article class="bm-card"><div class="ph"><div class="inner" data-img="board-3"></div></div><div class="meta"><span class="name">Shyam Agrawal</span><span class="bm muted">Independent Director</span></div></article>
+      <article class="bm-card"><div class="ph"><div class="inner" data-img="board-4"></div></div><div class="meta"><span class="name">Nivedita Ravindra Sarda</span><span class="bm muted">Independent Director</span></div></article>
+      <article class="bm-card"><div class="ph"><div class="inner" data-img="board-5"></div></div><div class="meta"><span class="name">Arvind Kumar Sharma</span><span class="bm muted">Independent Director</span></div></article>
+    </div>
+  </section>
+
+  <!-- 08 POLICIES -->
+  <section class="policies wrap" id="policies" data-fabric="#E4DED6" data-amp=".55">
+    <div class="pol-grid">
+      <div class="pol-left">
+        <span class="eyebrow">Policies &amp; Certificates</span>
+        <h2 class="h1 rv-h">Policies &amp; Certificates</h2>
+        <p class="bl muted" style="max-width:720px">Our commitment to quality, responsible manufacturing and operational excellence is supported by globally recognised management systems, industry certifications and robust governance practices that reinforce trust across every aspect of our business.</p>
+        <div class="chips" id="chips">
+          <button class="chip" aria-pressed="true">Quality</button>
+          <button class="chip" aria-pressed="false">Environment</button>
+          <button class="chip" aria-pressed="false">Occupational Health &amp; Safety</button>
+          <button class="chip" aria-pressed="false">Information Security</button>
+          <button class="chip" aria-pressed="false">Responsible Business</button>
+        </div>
+        <div style="margin-top:clamp(32px,8vw,160px)"><a class="link" href="#policies">Show Certificates <span class="arr">→</span></a></div>
+      </div>
+      <div class="certs">
+        <article class="cert"><div class="ph" data-img="cert-iso"><span class="lab">Certificate</span></div><div class="meta"><span class="name">ISO 9001:2015</span><span class="bm muted">Quality Management System</span></div></article>
+        <article class="cert"><div class="ph" data-img="cert-iatf"><span class="lab">Certificate</span></div><div class="meta"><span class="name">IATF 16949:2016</span><span class="bm muted">Quality Management System for Automotive</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 INVESTORS -->
+  <section class="investors wrap" id="investors" data-fabric="#F1EEE9" data-amp=".4">
+    <div class="inv-grid">
+      <div class="inv-img ph" id="invImg"><div class="inner" data-img="investors"></div><span class="lab">Investors image</span></div>
+      <div class="inv-copy">
+        <span class="eyebrow">Investors</span>
+        <h2 class="h1 rv-h">Investors</h2>
+        <p class="h4">Transparency, accountability and sustainable growth have been central to Mayur Uniquoters' journey since its inception. Our governance framework, long-term business strategy and commitment to responsible value creation continue to strengthen the confidence of our investors and stakeholders.</p>
+        <div class="cta"><a class="btn btn--primary" href="#investors">Explore Investor Information <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 CUSTOMERS -->
+  <section class="customers wrap" id="customers" data-fabric="#EFEBE5" data-amp=".5">
+    <div class="sec-head">
+      <div class="left"><span class="eyebrow">Customers</span><h2 class="h1 rv-h">Customers</h2></div>
+      <p class="h4">Long-standing partnerships are built on trust, consistency and quality.</p>
+    </div>
+    <div class="logo-grid" id="logoGrid"></div>
+  </section>
+</main>
+
+<!-- 11 FOOTER -->
+<footer class="wrap dark" id="contact" data-fabric="#7A0610" data-amp=".8">
+  <div class="foot-top">
+    <a href="#top" class="logo" aria-label="Back to top"><b>MAYUR</b><small>Uniquoters Ltd</small></a>
+    <div class="foot-col"><h4>Career</h4><a href="#contact">Life at Mayur</a><a href="#contact">Student Programmes</a><a href="#contact">Vacancies</a></div>
+    <div class="foot-col"><h4>FAQ</h4></div>
+    <div class="foot-col"><h4>Contact Us</h4><p style="user-select:all">+91-1423-224001</p><p style="user-select:all">info@mayur.biz</p></div>
+  </div>
+  <p class="foot-line" data-split>Engineering Material Solutions for a Changing World.</p>
+  <div class="foot-bottom"><span>Copyright © 2020 Mayur Uniquoters Limited, All rights reserved.</span><a href="#top" id="toTop" style="font-weight:500">Back to top ↑</a></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const root = document.documentElement;
+if (reduced) root.classList.add('reduced');
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+
+/* ---------- images: load only if the file exists, otherwise keep the tinted placeholder ---------- */
+const IMG_DIR = 'img/';
+const EXT = { 'hero-sofa':'png','hero-plant':'png','hero-table':'png' };
+$$('[data-img]').forEach(el => {
+  const name = el.dataset.img, ext = EXT[name] || 'jpg';
+  const src = IMG_DIR + name + '.' + ext, im = new Image();
+  im.onload = () => { el.style.backgroundImage = `url("${src}")`; el.classList.add('has-img'); el.closest('.ph')?.classList.add('has-img'); };
+  im.src = src;
+});
+// customer logos: logo-01.png … logo-28.png when supplied
+(() => {
+  const grid = $('#logoGrid');
+  for (let i = 1; i <= 28; i++) {
+    const cell = document.createElement('div'); cell.className = 'logo-cell';
+    const im = new Image(); im.alt = '';
+    im.onerror = () => cell.remove();
+    im.src = IMG_DIR + 'logo-' + String(i).padStart(2, '0') + '.png';
+    cell.appendChild(im); grid.appendChild(cell);
+  }
+})();
+
+/* brand logos from Figma, when exported */
+[['#hdr .logo','logo.svg'],['footer .logo','logo-footer.svg']].forEach(([sel,file]) => {
+  const im = new Image(); im.alt = 'Mayur Uniquoters';
+  im.onload = () => { const a = $(sel); a.innerHTML = ''; im.style.height = sel[0]==='#' ? '48px' : '90px'; im.style.width = 'auto'; a.appendChild(im); };
+  im.src = IMG_DIR + file;
+});
+
+/* ---------- word splitting ---------- */
+$$('[data-words]').forEach(el => {
+  el.innerHTML = el.textContent.trim().split(/\s+/).map(w => `<span class="w">${w}</span>`).join(' ');
+});
+
+/* ---------- mobile nav ---------- */
+const mBtn = $('#menuBtn'), mNav = $('#mnav');
+mBtn.addEventListener('click', () => { const o = mNav.hidden; mNav.hidden = !o; mBtn.setAttribute('aria-expanded', o); mBtn.textContent = o ? 'Close' : 'Menu'; $('#hdr').classList.toggle('on-dark', o); });
+$$('a', mNav).forEach(a => a.addEventListener('click', () => { mNav.hidden = true; mBtn.textContent = 'Menu'; mBtn.setAttribute('aria-expanded', false); }));
+
+/* ---------- chips ---------- */
+$$('#chips .chip').forEach(c => c.addEventListener('click', () => {
+  $$('#chips .chip').forEach(x => x.setAttribute('aria-pressed', x === c));
+  gsap.fromTo('.cert', { y: 24, opacity: .4 }, { y: 0, opacity: 1, duration: .7, stagger: .08, ease: 'power3.out' });
+}));
+
+/* ---------- board arrows ---------- */
+const row = $('#boardRow');
+const step = () => (row.querySelector('.bm-card')?.offsetWidth || 300) + 24;
+$('#bPrev').addEventListener('click', () => row.scrollBy({ left: -step(), behavior: 'smooth' }));
+$('#bNext').addEventListener('click', () => row.scrollBy({ left: step(), behavior: 'smooth' }));
+
+/* ================= WebGL: one coated-fabric surface for the whole page ================= */
+const fabric = { color: new THREE.Color('#EAE5DD'), amp: { v: 1 }, scroll: 0, mx: 0, my: 0 };
+let glOK = false;
+try {
+  const canvas = $('#gl');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(32, 1, .1, 50);
+  camera.position.set(0, 0, 6);
+  const uniforms = {
+    uTime: { value: 0 }, uAmp: { value: 1 }, uScroll: { value: 0 },
+    uColor: { value: fabric.color }, uMouse: { value: new THREE.Vector2() }, uLight: { value: new THREE.Vector3(.4, .6, .9) }
+  };
+  const noise = `
+    vec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}
+    vec4 mod289(vec4 x){return x-floor(x*(1./289.))*289.;}
+    vec4 perm(vec4 x){return mod289(((x*34.)+1.)*x);}
+    vec4 tis(vec4 r){return 1.79284291400159-.85373472095314*r;}
+    float snoise(vec3 v){const vec2 C=vec2(1./6.,1./3.);const vec4 D=vec4(0.,.5,1.,2.);
+      vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.-g;
+      vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;
+      i=mod289(i);vec4 p=perm(perm(perm(i.z+vec4(0.,i1.z,i2.z,1.))+i.y+vec4(0.,i1.y,i2.y,1.))+i.x+vec4(0.,i1.x,i2.x,1.));
+      float n_=.142857142857;vec3 ns=n_*D.wyz-D.xzx;vec4 j=p-49.*floor(p*ns.z*ns.z);vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.*x_);
+      vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.-abs(x)-abs(y);vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);
+      vec4 s0=floor(b0)*2.+1.;vec4 s1=floor(b1)*2.+1.;vec4 sh=-step(h,vec4(0.));vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+      vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
+      vec4 norm=tis(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
+      vec4 m=max(.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.);m=m*m;
+      return 42.*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));}`;
+  const vert = noise + `
+    uniform float uTime,uAmp,uScroll; uniform vec2 uMouse;
+    varying vec3 vN; varying vec2 vUv; varying float vH;
+    float h(vec2 p){
+      float t=uTime*.05; vec2 q=p+vec2(0.,uScroll*1.6);
+      float f=snoise(vec3(q*.28,t))*.6+snoise(vec3(q*.62+3.,t*1.3))*.2+snoise(vec3(q*1.3-7.,t*1.6))*.05;
+      float d=length(p-uMouse*vec2(3.2,1.8)); f+=.18*exp(-d*d*.9);
+      return f*uAmp;}
+    void main(){ vUv=uv; vec3 p=position; float e=.04;
+      float c=h(p.xy); float dx=h(p.xy+vec2(e,0.))-c; float dy=h(p.xy+vec2(0.,e))-c;
+      vN=normalize(vec3(-dx/e,-dy/e,1.)); vH=c; p.z+=c*.9;
+      gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);}`;
+  const frag = noise + `
+    precision highp float; uniform vec3 uColor,uLight; uniform float uTime;
+    varying vec3 vN; varying vec2 vUv; varying float vH;
+    void main(){
+      // pebble grain of coated fabric / artificial leather
+      vec2 g=vUv*vec2(260.,150.); float gr=snoise(vec3(g,1.))*.5+snoise(vec3(g*2.1,4.))*.25;
+      vec3 n=normalize(vN*vec3(.55,.55,1.)+vec3(gr*.035,gr*.03,0.));
+      vec3 L=normalize(uLight); float dif=clamp(dot(n,L),0.,1.);
+      float lum=dot(uColor,vec3(.299,.587,.114));
+      float spec=pow(clamp(dot(reflect(-L,n),vec3(0.,0.,1.)),0.,1.),24.)*mix(.12,.035,lum);
+      float shade=mix(.88,1.035,dif)+vH*.03;
+      vec3 col=uColor*shade+spec;
+      col=mix(col,uColor,.18*smoothstep(.3,.95,lum));
+      float vig=smoothstep(1.25,.25,length(vUv-.5)); col*=mix(.94,1.,vig);
+      gl_FragColor=vec4(col,1.);}`;
+  const geo = new THREE.PlaneGeometry(12, 7, 220, 130);
+  const mat = new THREE.ShaderMaterial({ uniforms, vertexShader: vert, fragmentShader: frag });
+  const mesh = new THREE.Mesh(geo, mat); mesh.rotation.x = -.18; scene.add(mesh);
+  const resize = () => { const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false); camera.aspect = w / h;
+    const s = Math.max(1, (w / h) / 1.6); mesh.scale.set(s * 1.05, 1.05 * Math.max(1, 1.2 / (w / h)), 1); camera.updateProjectionMatrix(); };
+  resize(); addEventListener('resize', resize);
+  const mouse = new THREE.Vector2();
+  addEventListener('pointermove', e => { mouse.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight * 2 - 1)); });
+  let t0 = performance.now();
+  const tick = () => {
+    const t = (performance.now() - t0) / 1000;
+    uniforms.uTime.value = reduced ? 0 : t;
+    uniforms.uMouse.value.lerp(mouse, .04);
+    uniforms.uAmp.value = fabric.amp.v;
+    uniforms.uScroll.value += (fabric.scroll - uniforms.uScroll.value) * .08;
+    uniforms.uLight.value.set(.4 + uniforms.uMouse.value.x * .5, .6 + uniforms.uMouse.value.y * .4, .9);
+    mesh.rotation.y = uniforms.uMouse.value.x * .05; mesh.rotation.x = -.18 + uniforms.uMouse.value.y * .04;
+    renderer.render(scene, camera);
+  };
+  gsap.ticker.add(tick);
+  glOK = true;
+} catch (e) { root.classList.add('no-webgl'); }
+$$('[data-fabric]').forEach(s => s.style.setProperty('--sec-bg', s.dataset.fabric));
+
+/* ================= Smooth scroll + GSAP ================= */
+gsap.registerPlugin(ScrollTrigger);
+let lenis = null;
+if (!reduced && window.Lenis) {
+  lenis = new Lenis({ lerp: .085, smoothWheel: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+}
+$$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const id = a.getAttribute('href'); const t = id === '#top' ? 0 : $(id);
+  if (t === null) return; e.preventDefault();
+  lenis ? lenis.scrollTo(t, { duration: 1.6 }) : (t === 0 ? scrollTo({ top: 0, behavior: 'smooth' }) : t.scrollIntoView({ behavior: 'smooth' }));
+}));
+
+/* header: hide on scroll down, tint over dark sections */
+const hdr = $('#hdr'); let lastY = 0;
+ScrollTrigger.create({ start: 0, end: 'max', onUpdate: self => {
+  const y = self.scroll(); hdr.classList.toggle('is-solid', y > 80);
+  if (mNav.hidden) hdr.classList.toggle('is-hidden', y > lastY && y > 300); lastY = y;
+  fabric.scroll = self.progress;
+}});
+$$('[data-dark]').forEach(s => ScrollTrigger.create({ trigger: s, start: 'top 60px', end: 'bottom 60px', toggleClass: { targets: hdr, className: 'on-dark' } }));
+
+/* fabric re-tint: whichever section sits under the viewport centre */
+const fabSecs = $$('[data-fabric]'); let activeFab = null;
+const pickFabric = () => {
+  const mid = innerHeight * .5; let s = fabSecs[0];
+  for (const el of fabSecs) { const r = el.getBoundingClientRect(); if (r.top <= mid && r.bottom > mid) { s = el; break; } if (r.top <= mid) s = el; }
+  if (s === activeFab) return; activeFab = s;
+  const c = new THREE.Color(s.dataset.fabric);
+  gsap.to(fabric.color, { r: c.r, g: c.g, b: c.b, duration: 1.2, ease: 'power2.out', overwrite: true });
+  gsap.to(fabric.amp, { v: +s.dataset.amp, duration: 1.6, ease: 'power2.out', overwrite: true });
+};
+gsap.ticker.add(pickFabric);
+
+if (reduced) { $('#histBar').style.transform = 'scaleX(1)'; return; }
+
+/* ---------- hero intro ---------- */
+const intro = gsap.timeline({ delay: .15 });
+intro.from('#heroTitle .line-mask>span', { yPercent: 110, duration: 1.3, stagger: .1, ease: 'expo.out' })
+  .from('.hero-stage .cut', { y: 160, opacity: 0, duration: 1.6, stagger: .12, ease: 'expo.out' }, '<.1')
+  .from('.hero-foot', { opacity: 0, y: 20, duration: .8 }, '<.5')
+  .from('.hero-foot .rule', { scaleX: 0, transformOrigin: 'left', duration: 1.2, ease: 'expo.out' }, '<');
+
+/* hero parallax: scroll + mouse */
+$$('.hero-stage .cut').forEach(el => {
+  const d = +el.dataset.depth;
+  gsap.to(el, { yPercent: -18 * d, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+});
+gsap.to('#heroTitle', { yPercent: 35, opacity: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+const stage = $('.hero-stage');
+addEventListener('pointermove', e => {
+  const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
+  $$('.cut', stage).forEach(el => gsap.to(el, { x: -x * 40 * el.dataset.depth, rotation: x * 1.2 * el.dataset.depth, duration: 1.4, ease: 'power3.out', overwrite: 'auto' }));
+});
+
+/* ---------- generic reveals ---------- */
+$$('.rv-h').forEach(h => {
+  h.innerHTML = `<span class="line-mask"><span>${h.innerHTML}</span></span>`;
+  gsap.from(h.querySelector('.line-mask>span'), { yPercent: 105, duration: 1.3, ease: 'expo.out', scrollTrigger: { trigger: h, start: 'top 88%' } });
+});
+$$('.eyebrow').forEach(e => gsap.from(e, { opacity: 0, x: -16, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: e, start: 'top 90%' } }));
+$$('.rv-rule, .val .rule').forEach(r => gsap.from(r, { scaleX: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: r, start: 'top 92%' } }));
+
+/* word-by-word scrub */
+$$('[data-words]').forEach(el => gsap.to(el.querySelectorAll('.w'), { opacity: 1, stagger: .1, ease: 'none',
+  scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: true } }));
+
+/* about images: differential parallax + clip reveal */
+$$('.about-imgs .ph').forEach((el, i) => {
+  gsap.fromTo(el, { clipPath: 'inset(18% 0 0 0)' }, { clipPath: 'inset(0% 0 0 0)', ease: 'none', scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 45%', scrub: true } });
+  gsap.to(el, { yPercent: +el.dataset.speed * -1.6, ease: 'none', scrollTrigger: { trigger: '.about-imgs', start: 'top bottom', end: 'bottom top', scrub: true } });
+});
+
+/* ---------- vision / mission / values sticky ---------- */
+const mm = gsap.matchMedia();
+mm.add('(min-width: 1101px)', () => {
+  const slides = $$('.split .slide'), btns = $$('.split-list button'), layers = $$('.split-img .layer');
+  gsap.set(slides, { opacity: 0, y: 30 }); gsap.set(slides[0], { opacity: 1, y: 0 });
+  let cur = 0;
+  const go = i => { if (i === cur) return;
+    const prev = cur, dir = i > prev ? 1 : -1; cur = i;
+    gsap.killTweensOf(slides);
+    slides.forEach((sl, k) => { if (k !== prev && k !== i) gsap.set(sl, { opacity: 0, y: 0 }); });
+    gsap.to(slides[prev], { opacity: 0, y: -24 * dir, duration: .3, ease: 'power2.in' });
+    gsap.fromTo(slides[i], { opacity: 0, y: 24 * dir }, { opacity: 1, y: 0, duration: .6, delay: .28, ease: 'power3.out' });
+    layers.forEach((l, k) => gsap.to(l, { clipPath: k <= i ? 'inset(0% 0 0 0)' : 'inset(100% 0 0 0)', duration: 1.1, ease: 'expo.inOut', overwrite: true }));
+    btns.forEach((b, k) => b.classList.toggle('on', k === i));
+    $('#splitCount').textContent = `0${i + 1} / 03`; };
+  const st = ScrollTrigger.create({ trigger: '.split', start: 'top top', end: 'bottom bottom', pin: '.split-pin', pinSpacing: false,
+    onUpdate: s => go(Math.min(2, Math.floor(s.progress * 3))) });
+  btns.forEach((b, i) => b.addEventListener('click', () => { const y = st.start + (st.end - st.start) * (i + .5) / 3; lenis ? lenis.scrollTo(y, { duration: 1.2 }) : scrollTo({ top: y, behavior: 'smooth' }); }));
+  return () => { gsap.set(slides, { clearProps: 'all' }); gsap.set(layers, { clearProps: 'clipPath' }); };
+});
+
+/* values stagger */
+gsap.from('.val > *:not(.rule)', { y: 40, opacity: 0, duration: 1, stagger: .04, ease: 'power3.out', scrollTrigger: { trigger: '.val-grid', start: 'top 85%' } });
+
+/* ---------- history: horizontal pinned scroll ---------- */
+mm.add('(min-width: 901px)', () => {
+  const track = $('#histTrack');
+  const dist = () => Math.max(0, track.scrollWidth - (innerWidth - 2 * parseFloat(getComputedStyle(track.parentElement).paddingLeft)));
+  const tw = gsap.to(track, { x: () => -dist(), ease: 'none',
+    scrollTrigger: { trigger: '.history', start: 'top top', end: () => '+=' + (dist() + innerHeight * .4), pin: '.hist-pin', scrub: 1, invalidateOnRefresh: true,
+      onUpdate: s => gsap.set('#histBar', { scaleX: .33 + s.progress * .67 }) } });
+  $$('.mile .inner').forEach(el => gsap.fromTo(el, { xPercent: 6 }, { xPercent: -6, ease: 'none', scrollTrigger: { trigger: el.closest('.mile'), containerAnimation: tw, start: 'left right', end: 'right left', scrub: true } }));
+  $$('.mile .yr').forEach(el => gsap.from(el, { yPercent: 60, opacity: 0, ease: 'power2.out', scrollTrigger: { trigger: el.closest('.mile'), containerAnimation: tw, start: 'left 90%', end: 'left 50%', scrub: true } }));
+  // drag the timeline: horizontal drag maps onto page scroll
+  const hst = tw.scrollTrigger, hp = $('.hist-pin');
+  let dragging = false, sx = 0, sy = 0;
+  hp.addEventListener('pointerdown', e => { if (e.button !== 0) return; dragging = true; sx = e.clientX; sy = hst.scroll(); hp.classList.add('grabbing'); hp.setPointerCapture(e.pointerId); });
+  hp.addEventListener('pointermove', e => { if (!dragging) return;
+    const k = (hst.end - hst.start) / Math.max(1, dist());
+    const y = Math.min(hst.end, Math.max(hst.start, sy + (sx - e.clientX) * k * 1.4));
+    lenis ? lenis.scrollTo(y, { immediate: true }) : scrollTo(0, y); });
+  const stop = e => { if (!dragging) return; dragging = false; hp.classList.remove('grabbing'); try { hp.releasePointerCapture(e.pointerId); } catch (_) {} };
+  hp.addEventListener('pointerup', stop); hp.addEventListener('pointercancel', stop);
+  hp.addEventListener('dragstart', e => e.preventDefault());
+  const cur = $('#cursor');
+  hp.addEventListener('pointerenter', () => cur.classList.add('big')); hp.addEventListener('pointerleave', () => cur.classList.remove('big'));
+});
+
+/* ---------- founder ---------- */
+gsap.fromTo('.founder .bg', { yPercent: -8, scale: 1.15 }, { yPercent: 8, scale: 1, ease: 'none', scrollTrigger: { trigger: '.founder', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+/* ---------- board ---------- */
+gsap.from('.bm-card', { y: 90, opacity: 0, duration: 1.3, stagger: .09, ease: 'expo.out', scrollTrigger: { trigger: '#boardRow', start: 'top 88%' } });
+$$('.bm-card .ph .inner').forEach(el => gsap.fromTo(el, { yPercent: -4, scale: 1.08 }, { yPercent: 4, scale: 1.08, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } }));
+
+/* ---------- certificates: float + 3D tilt ---------- */
+gsap.from('.cert', { y: 120, rotateX: 14, opacity: 0, duration: 1.4, stagger: .12, ease: 'expo.out', scrollTrigger: { trigger: '.certs', start: 'top 85%' } });
+$$('.cert').forEach((c, i) => {
+  gsap.to(c, { yPercent: i ? -10 : 6, ease: 'none', scrollTrigger: { trigger: '.policies', start: 'top bottom', end: 'bottom top', scrub: true } });
+  c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    gsap.to(c, { rotateY: x * 10, rotateX: -y * 10, duration: .6, ease: 'power3.out' }); });
+  c.addEventListener('pointerleave', () => gsap.to(c, { rotateY: 0, rotateX: 0, duration: .9, ease: 'elastic.out(1,.6)' }));
+});
+
+/* ---------- investors ---------- */
+gsap.to('#invImg', { clipPath: 'inset(0% 0% 0% 0% round 20px)', ease: 'none', scrollTrigger: { trigger: '#invImg', start: 'top 90%', end: 'top 25%', scrub: true } });
+gsap.fromTo('#invImg .inner', { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '#invImg', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+/* ---------- footer ---------- */
+const fl = $('.foot-line'); fl.innerHTML = fl.textContent.split(' ').map(w => `<span class="line-mask" style="display:inline-block"><span style="display:inline-block">${w}</span></span>`).join(' ');
+gsap.from('.foot-line .line-mask>span', { yPercent: 110, duration: 1.2, stagger: .04, ease: 'expo.out', scrollTrigger: { trigger: fl, start: 'top 92%' } });
+
+/* ---------- cursor ---------- */
+const cur = $('#cursor');
+const qx = gsap.quickTo(cur, 'x', { duration: .35, ease: 'power3' }), qy = gsap.quickTo(cur, 'y', { duration: .35, ease: 'power3' });
+addEventListener('pointermove', e => { qx(e.clientX); qy(e.clientY); });
+
+addEventListener('load', () => ScrollTrigger.refresh());
+})();
+</script>
+
+</body>
+</html>

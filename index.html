@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mayur Uniquoters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor" aria-hidden="true"><span>Drag</span></div>
+
+<header class="site" id="hdr">
+  <a href="#top" class="logo" aria-label="Mayur Uniquoters home"><b>MAYUR</b><small>Uniquoters Ltd</small></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="#about" class="active">About</a>
+    <a href="market-segment.html">Market Segment</a>
+    <a href="#history">Plants</a>
+    <a href="#customers">Products</a>
+    <a href="sustainability.html">Sustainability</a>
+    <a href="#customers">Global Presence</a>
+    <a href="#investors">News &amp; Media</a>
+  </nav>
+  <div class="hdr-right"><span class="lang">EN&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#contact">Contact</a></span><button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav">Menu</button></div>
+</header>
+<div class="mobile-nav" id="mnav" hidden>
+  <a href="#about">About</a><a href="market-segment.html">Market Segment</a><a href="#values">Values</a><a href="#history">History</a><a href="#board">Board</a><a href="sustainability.html">Sustainability</a><a href="#investors">Investors</a><a href="#contact">Contact</a>
+</div>
+
+<main id="top">
+  <!-- 01 HERO -->
+  <section class="hero wrap" data-fabric="#EAE5DD" data-amp="1" data-bg>
+    <h1 class="display" id="heroTitle">
+      <span class="line-mask"><span>Engineering Material</span></span>
+      <span class="line-mask"><span>Solutions for a</span></span>
+      <span class="line-mask"><span>Changing World.</span></span>
+    </h1>
+    <div class="hero-stage" aria-hidden="true">
+      <div class="cut sofa" data-img="hero-sofa" data-depth="0.6"></div>
+      <div class="cut plant" data-img="hero-plant" data-depth="1.1"></div>
+      <div class="cut table" data-img="hero-table" data-depth="1.4"></div>
+    </div>
+    <div class="hero-foot">
+      <div class="scroll"><div class="rule"></div><span class="cap">Scroll to discover ↓</span></div>
+      <span class="cap muted">Since 1994</span>
+    </div>
+  </section>
+
+  <!-- 02 ABOUT -->
+  <section class="about wrap" id="about" data-fabric="#F1EEE9" data-amp=".45">
+    <div class="rule rv-rule"></div>
+    <div class="about-top">
+      <div style="display:flex;flex-direction:column;gap:40px">
+        <span class="eyebrow">About Us</span>
+        <h2 class="h1 rv-h">About Us</h2>
+      </div>
+      <p class="h3 stmt" data-words>Driven by innovation, advanced manufacturing and responsible practices, we develop high-performance material solutions for the automotive, footwear, furnishing and lifestyle industries, delivering quality that is trusted across global markets.</p>
+    </div>
+    <div class="about-imgs">
+      <div class="ph" data-img="about-1" data-speed="-6"><span class="lab">About image 1</span></div>
+      <div class="ph" data-img="about-2" data-speed="8"><span class="lab">About image 2</span></div>
+      <div class="ph" data-img="about-3" data-speed="-4"><span class="lab">About image 3</span></div>
+      <div class="ph" data-img="about-4" data-speed="10"><span class="lab">About image 4</span></div>
+    </div>
+  </section>
+
+  <!-- 03 VISION / MISSION / VALUES -->
+  <section class="split" id="split" data-fabric="#F1EEE9" data-amp=".35">
+    <div class="split-pin wrap">
+      <div class="split-list" role="tablist" aria-label="Purpose">
+        <button class="on" data-i="0" role="tab"><span class="ar">→</span>Vision</button>
+        <button data-i="1" role="tab"><span class="ar">→</span>Mission</button>
+        <button data-i="2" role="tab"><span class="ar">→</span>Values</button>
+      </div>
+      <div class="split-copy">
+        <div class="slides">
+          <div class="slide"><span class="eyebrow">Vision</span><p class="h4">To be the global leader in our industry through a great customer experience.</p></div>
+          <div class="slide"><span class="eyebrow">Mission</span><p class="bl">Drive profitable growth by providing an excellent customer experience through consistency, high-quality products and services, with great stakeholder relationships, in a sustainable manner.</p></div>
+          <div class="slide"><span class="eyebrow">Values</span><p class="h4">The principles that guide every decision, every partnership and every innovation.</p></div>
+        </div>
+        <span class="cap muted" id="splitCount">01 / 03</span>
+      </div>
+      <div class="split-img ph" aria-hidden="true">
+        <div class="layer" data-img="split"></div>
+        <div class="layer" data-img="about-1"></div>
+        <div class="layer" data-img="about-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 VALUES -->
+  <section class="values wrap" id="values" data-fabric="#EFEBE5" data-amp=".5">
+    <div class="sec-head">
+      <div class="left"><span class="eyebrow">Values</span><h2 class="h1 rv-h">Values</h2></div>
+      <p class="h4">The principles that guide every decision, every partnership and every innovation.</p>
+    </div>
+    <div class="val-grid">
+      <div class="val"><div class="rule"></div><span class="cap muted">01</span>
+        <img class="vi" src="img/icon-1.svg" alt="" width="64" height="64">
+        <h3 class="h4">Customer First</h3></div>
+      <div class="val"><div class="rule"></div><span class="cap muted">02</span>
+        <img class="vi" src="img/icon-2.svg" alt="" width="64" height="64">
+        <h3 class="h4">Innovation</h3></div>
+      <div class="val"><div class="rule"></div><span class="cap muted">03</span>
+        <img class="vi" src="img/icon-3.svg" alt="" width="64" height="64">
+        <h3 class="h4">Quality</h3></div>
+      <div class="val"><div class="rule"></div><span class="cap muted">04</span>
+        <img class="vi" src="img/icon-4.svg" alt="" width="64" height="64">
+        <h3 class="h4">People</h3></div>
+      <div class="val"><div class="rule"></div><span class="cap muted">05</span>
+        <img class="vi" src="img/icon-5.svg" alt="" width="64" height="64">
+        <h3 class="h4">One Team</h3></div>
+      <div class="val"><div class="rule"></div><span class="cap muted">06</span>
+        <img class="vi" src="img/icon-6.svg" alt="" width="64" height="64">
+        <h3 class="h4">Responsibility</h3></div>
+    </div>
+  </section>
+
+  <!-- 05 HISTORY -->
+  <section class="history dark" id="history" data-fabric="#191516" data-amp=".7" data-dark>
+    <div class="hist-pin">
+      <div class="sec-head wrap">
+        <div class="left"><span class="eyebrow">History</span><h2 class="h1 rv-h">History</h2></div>
+        <p class="bl">From a single manufacturing facility in 1994 to a globally trusted material solutions company, our journey has been defined by innovation, expansion and a relentless pursuit of excellence. Every milestone reflects our commitment to creating better products, building stronger partnerships and growing responsibly.</p>
+      </div>
+      <div class="wrap" style="overflow:visible">
+        <div class="hist-track" id="histTrack">
+          <article class="mile"><div class="ph"><div class="inner" data-img="history-1994"></div><span class="lab">1994</span></div>
+            <div class="mile-body"><span class="yr">1994</span><p class="bm">Mayur Uniquoters was founded with its first manufacturing facility in Jaitpura, Jaipur.</p></div></article>
+          <article class="mile"><div class="ph"><div class="inner" data-img="history-1995"></div><span class="lab">1995</span></div>
+            <div class="mile-body"><span class="yr">1995</span><p class="bm">First export shipment, marking the beginning of our global journey.</p></div></article>
+          <article class="mile"><div class="ph"><div class="inner" data-img="history-2012"></div><span class="lab">2012</span></div>
+            <div class="mile-body"><span class="yr">2012</span><p class="bm">Established our wholly owned subsidiary in Texas, USA.</p></div></article>
+        </div>
+      </div>
+      <div class="wrap hist-meta">
+        <div class="hist-bar" style="flex:1"><i id="histBar"></i></div>
+        <span class="cap" style="letter-spacing:.08em;text-transform:uppercase">Drag / scroll&nbsp;&nbsp;→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 FOUNDER -->
+  <section class="founder" id="founder" data-fabric="#191516" data-amp=".5" data-dark>
+    <div class="bg" data-img="founder"></div>
+    <div class="shade"></div>
+    <div class="content wrap">
+      <div></div>
+      <div class="q">
+        <span class="eyebrow">Founder’s Message</span>
+        <blockquote class="h3 stmt" data-words style="margin:0">“When we started Mayur Uniquoters in 1994, our vision was simple: to create products that customers could rely on and relationships that would stand the test of time. Over the years, that vision has grown into a global enterprise built on quality, innovation and trust.”</blockquote>
+        <div><p class="bl" style="font-weight:500">Suresh Kumar Poddar</p><p class="bm muted">Chairman &amp; Managing Director</p></div>
+        <div><a class="btn btn--ondark" href="#founder">Read More <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 BOARD -->
+  <section class="board wrap" id="board" data-fabric="#F1EEE9" data-amp=".4">
+    <div class="sec-head">
+      <div class="left"><span class="eyebrow">Board Members</span><h2 class="h1 rv-h">Board Members</h2></div>
+      <div class="board-head-r">
+        <p class="bl muted">Guided by experienced leadership and strong governance, our Board brings together diverse expertise to steer Mayur Uniquoters towards sustainable growth, operational excellence and long-term value creation.</p>
+        <div class="board-arrows"><button class="icon-btn" id="bPrev" aria-label="Previous board member">←</button><button class="icon-btn icon-btn--solid" id="bNext" aria-label="Next board member">→</button></div>
+      </div>
+    </div>
+    <div class="board-row" id="boardRow">
+      <article class="bm-card"><div class="ph"><div class="inner" data-img="board-1"></div></div><div class="meta"><span class="name">Suresh Kumar Poddar</span><span class="bm muted">Chairman &amp; Managing Director</span></div></article>
+      <article class="bm-card"><div class="ph"><div class="inner" data-img="board-2"></div></div><div class="meta"><span class="name">Arun Bagaria</span><span class="bm muted">Whole Time Executive Director</span></div></article>
+      <article class="bm-card"><div class="ph"><div class="inner" data-img="board-3"></div></div><div class="meta"><span class="name">Shyam Agrawal</span><span class="bm muted">Independent Director</span></div></article>
+      <article class="bm-card"><div class="ph"><div class="inner" data-img="board-4"></div></div><div class="meta"><span class="name">Nivedita Ravindra Sarda</span><span class="bm muted">Independent Director</span></div></article>
+      <article class="bm-card"><div class="ph"><div class="inner" data-img="board-5"></div></div><div class="meta"><span class="name">Arvind Kumar Sharma</span><span class="bm muted">Independent Director</span></div></article>
+    </div>
+  </section>
+
+  <!-- 08 POLICIES -->
+  <section class="policies wrap" id="policies" data-fabric="#E4DED6" data-amp=".55">
+    <div class="pol-grid">
+      <div class="pol-left">
+        <span class="eyebrow">Policies &amp; Certificates</span>
+        <h2 class="h1 rv-h">Policies &amp; Certificates</h2>
+        <p class="bl muted" style="max-width:720px">Our commitment to quality, responsible manufacturing and operational excellence is supported by globally recognised management systems, industry certifications and robust governance practices that reinforce trust across every aspect of our business.</p>
+        <div class="chips" id="chips">
+          <button class="chip" aria-pressed="true">Quality</button>
+          <button class="chip" aria-pressed="false">Environment</button>
+          <button class="chip" aria-pressed="false">Occupational Health &amp; Safety</button>
+          <button class="chip" aria-pressed="false">Information Security</button>
+          <button class="chip" aria-pressed="false">Responsible Business</button>
+        </div>
+        <div style="margin-top:clamp(32px,8vw,160px)"><a class="link" href="#policies">Show Certificates <span class="arr">→</span></a></div>
+      </div>
+      <div class="certs">
+        <article class="cert"><div class="ph" data-img="cert-iso"><span class="lab">Certificate</span></div><div class="meta"><span class="name">ISO 9001:2015</span><span class="bm muted">Quality Management System</span></div></article>
+        <article class="cert"><div class="ph" data-img="cert-iatf"><span class="lab">Certificate</span></div><div class="meta"><span class="name">IATF 16949:2016</span><span class="bm muted">Quality Management System for Automotive</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 INVESTORS -->
+  <section class="investors wrap" id="investors" data-fabric="#F1EEE9" data-amp=".4">
+    <div class="inv-grid">
+      <div class="inv-img ph" id="invImg"><div class="inner" data-img="investors"></div><span class="lab">Investors image</span></div>
+      <div class="inv-copy">
+        <span class="eyebrow">Investors</span>
+        <h2 class="h1 rv-h">Investors</h2>
+        <p class="h4">Transparency, accountability and sustainable growth have been central to Mayur Uniquoters' journey since its inception. Our governance framework, long-term business strategy and commitment to responsible value creation continue to strengthen the confidence of our investors and stakeholders.</p>
+        <div class="cta"><a class="btn btn--primary" href="#investors">Explore Investor Information <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 CUSTOMERS -->
+  <section class="customers wrap" id="customers" data-fabric="#EFEBE5" data-amp=".5">
+    <div class="sec-head">
+      <div class="left"><span class="eyebrow">Customers</span><h2 class="h1 rv-h">Customers</h2></div>
+      <p class="h4">Long-standing partnerships are built on trust, consistency and quality.</p>
+    </div>
+    <div class="logo-grid" id="logoGrid"></div>
+  </section>
+</main>
+
+<!-- 11 FOOTER -->
+<footer class="wrap dark" id="contact" data-fabric="#7A0610" data-amp=".8">
+  <div class="foot-top">
+    <a href="#top" class="logo" aria-label="Back to top"><b>MAYUR</b><small>Uniquoters Ltd</small></a>
+    <div class="foot-col"><h4>Career</h4><a href="#contact">Life at Mayur</a><a href="#contact">Student Programmes</a><a href="#contact">Vacancies</a></div>
+    <div class="foot-col"><h4>FAQ</h4></div>
+    <div class="foot-col"><h4>Contact Us</h4><p style="user-select:all">+91-1423-224001</p><p style="user-select:all">info@mayur.biz</p></div>
+  </div>
+  <p class="foot-line" data-split>Engineering Material Solutions for a Changing World.</p>
+  <div class="foot-bottom"><span>Copyright © <span class="copy-year">2026</span> Mayur Uniquoters Limited, All rights reserved.</span><a href="#top" id="toTop" style="font-weight:500">Back to top ↑</a></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/home.js"></script>
+
+<div class="veil" id="veil" aria-hidden="true"></div>
+<script src="js/transition.js"></script>
+</body>
+</html>

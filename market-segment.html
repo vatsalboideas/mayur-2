@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Furnishing — Market Segment — Mayur Uniquoters</title>
+<meta name="description" content="Furnishing materials from Mayur Uniquoters: industries, areas of application and performance attributes for residential, commercial and outdoor spaces.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/market-segment.css">
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor" aria-hidden="true"><span>Drag</span></div>
+
+<header class="site" id="hdr">
+  <a href="index.html" class="logo" aria-label="Mayur Uniquoters home"><b>MAYUR</b><small>Uniquoters Ltd</small></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#about">About</a>
+    <a href="market-segment.html" class="active" aria-current="page">Market Segment</a>
+    <a href="index.html#history">Plants</a>
+    <a href="index.html#customers">Products</a>
+    <a href="sustainability.html">Sustainability</a>
+    <a href="index.html#customers">Global Presence</a>
+    <a href="index.html#investors">News &amp; Media</a>
+  </nav>
+  <div class="hdr-right"><span class="lang">EN&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#contact">Contact</a></span><button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav">Menu</button></div>
+</header>
+<div class="mobile-nav" id="mnav" hidden>
+  <a href="index.html#about">About</a><a href="market-segment.html" aria-current="page">Market Segment</a><a href="index.html#values">Values</a><a href="index.html#history">History</a><a href="index.html#board">Board</a><a href="sustainability.html">Sustainability</a><a href="index.html#investors">Investors</a><a href="#contact">Contact</a>
+</div>
+
+<main id="top">
+  <!-- 01 HERO — title, segment tabs, wide image -->
+  <section class="m-hero wrap" data-fabric="#F1EEE9" data-amp=".9">
+    <div class="m-hero-top">
+      <div class="left">
+        <span class="eyebrow">Market Segment</span>
+        <h1 class="display" id="heroTitle"><span class="line-mask"><span>Furnishing</span></span></h1>
+      </div>
+      <p class="bl m-hero-sub">Material solutions designed for indoor and outdoor spaces, bringing together comfort, performance and design versatility across residential, commercial and recreational environments.</p>
+    </div>
+    <div class="m-tabs-row">
+      <div class="m-tabs" role="tablist" aria-label="Market segments">
+        <button class="chip" role="tab" aria-selected="true" aria-pressed="true">Furnishing</button>
+        <button class="chip" role="tab" aria-selected="false" aria-pressed="false" aria-disabled="true" title="Coming soon">Automotive<span class="soon">Soon</span></button>
+        <button class="chip" role="tab" aria-selected="false" aria-pressed="false" aria-disabled="true" title="Coming soon">Footwear<span class="soon">Soon</span></button>
+        <button class="chip" role="tab" aria-selected="false" aria-pressed="false" aria-disabled="true" title="Coming soon">Leather Goods<span class="soon">Soon</span></button>
+      </div>
+      <span class="cap muted">01 / 04</span>
+    </div>
+    <div class="m-hero-img ph" id="heroImg"><div class="inner" data-img="ms-hero"></div><span class="lab">Furnishing hero</span></div>
+  </section>
+
+  <!-- 02 OVERVIEW -->
+  <section class="overview wrap" id="overview" data-fabric="#F1EEE9" data-amp=".4">
+    <div class="ov-top">
+      <span class="eyebrow">Overview</span>
+      <div class="ov-copy">
+        <p class="h3 stmt" data-words>From living rooms to stadium seating, our furnishing materials pair the look and touch of natural leather with the durability modern spaces demand.</p>
+        <div><a class="link" href="#attributes">Explore Products <span class="arr">→</span></a></div>
+      </div>
+    </div>
+    <div class="ov-imgs">
+      <div class="ph"><div class="inner" data-img="ms-grey"></div><span class="lab">Living room</span></div>
+      <div class="ph"><div class="inner" data-img="ms-taupe"></div><span class="lab">Sofa</span></div>
+      <div class="ph"><div class="inner" data-img="ms-black"></div><span class="lab">Sectional</span></div>
+    </div>
+  </section>
+
+  <!-- 03 INDUSTRIES — sticky split -->
+  <section class="split split6" id="industries" data-fabric="#E4DED6" data-amp=".35">
+    <div class="split-pin wrap">
+      <div class="split-head">
+        <span class="eyebrow">Industries</span>
+        <div class="split-arrows"><button class="icon-btn" id="pPrev" aria-label="Previous industry">←</button><button class="icon-btn icon-btn--solid" id="pNext" aria-label="Next industry">→</button></div>
+      </div>
+      <div class="split-list" role="tablist" aria-label="Industries">
+        <button class="on" data-i="0" role="tab"><span class="ar">→</span>Residential</button>
+        <button data-i="1" role="tab"><span class="ar">→</span>Work Place</button>
+        <button data-i="2" role="tab"><span class="ar">→</span>Restaurants &amp; Retail</button>
+        <button data-i="3" role="tab"><span class="ar">→</span>Spas</button>
+        <button data-i="4" role="tab"><span class="ar">→</span>Stadiums &amp; Theatre</button>
+        <button data-i="5" role="tab"><span class="ar">→</span>Poolside &amp; Outdoors</button>
+      </div>
+      <div class="split-copy">
+        <div class="slides">
+          <div class="slide" data-m="ms-dogs"><span class="eyebrow">Residential</span><p class="h3">Upholstery that keeps up with everyday living — kids, pets and all.</p><p class="bm muted">Easy-clean, stain-resistant surfaces for sofas, recliners, headboards and soft furnishings at home.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="ms-black"><span class="eyebrow">Work Place</span><p class="h3">Seating that looks sharp through long working days.</p><p class="bm muted">Abrasion-resistant materials for office chairs, lounges and meeting rooms.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="ms-hero"><span class="eyebrow">Restaurants &amp; Retail</span><p class="h3">Built for high traffic, quick turnovers and constant cleaning.</p><p class="bm muted">Spill-proof, wipe-clean finishes for banquettes, booths and display seating.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="ms-taupe"><span class="eyebrow">Spas</span><p class="h3">Soft to the touch, resistant to water, oils and steam.</p><p class="bm muted">Skin-friendly, non-allergenic surfaces for treatment beds and lounge seating.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="ms-grey"><span class="eyebrow">Stadiums &amp; Theatre</span><p class="h3">Comfort that lasts the season, show after show.</p><p class="bm muted">Durable, colourfast materials for auditorium, cinema and stadium seating.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="ms-lounge"><span class="eyebrow">Poolside &amp; Outdoors</span><p class="h3">Made for sun, splash and open air.</p><p class="bm muted">UV and water-resistant materials for loungers, cushions and outdoor furniture.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+        </div>
+        <div class="split-foot">
+          <p class="bm muted">Our furnishing materials are specified wherever seating needs to look good and work hard.</p>
+          <span class="cap muted" id="splitCount">01 / 06</span>
+        </div>
+      </div>
+      <div class="split-img" aria-hidden="true">
+        <div class="layer"><div class="inner" data-img="ms-dogs"></div><span class="pn">01 · Residential</span></div>
+        <div class="layer"><div class="inner" data-img="ms-black"></div><span class="pn">02 · Work Place</span></div>
+        <div class="layer"><div class="inner" data-img="ms-hero"></div><span class="pn">03 · Restaurants &amp; Retail</span></div>
+        <div class="layer"><div class="inner" data-img="ms-taupe"></div><span class="pn">04 · Spas</span></div>
+        <div class="layer"><div class="inner" data-img="ms-grey"></div><span class="pn">05 · Stadiums &amp; Theatre</span></div>
+        <div class="layer"><div class="inner" data-img="ms-lounge"></div><span class="pn">06 · Poolside &amp; Outdoors</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 AREA OF APPLICATION — dark horizontal -->
+  <section class="history application dark" id="application" data-fabric="#191516" data-amp=".7" data-dark>
+    <div class="hist-pin">
+      <div class="sec-head wrap">
+        <div class="left"><span class="eyebrow">Area of Application</span><h2 class="h1 rv-h">Where our materials live and perform</h2></div>
+        <p class="bl muted">Engineered to be cut, stitched and shaped for every kind of furniture — from statement sofas to high-traffic public seating.</p>
+      </div>
+      <div class="wrap" style="overflow:visible">
+        <div class="hist-track" id="histTrack">
+          <article class="app-card"><div class="ph"><div class="inner" data-img="ms-lounge"></div><span class="lab">Upholstery</span></div><span class="cap muted">01</span><h3 class="h4">Upholstery</h3><p class="bm muted">Lounge chairs, armchairs and accent seating.</p></article>
+          <article class="app-card"><div class="ph"><div class="inner" data-img="ms-grey"></div><span class="lab">Sofas</span></div><span class="cap muted">02</span><h3 class="h4">Sofas &amp; Sectionals</h3><p class="bm muted">Large-format panels with consistent grain and colour.</p></article>
+          <article class="app-card"><div class="ph"><div class="inner" data-img="ms-black"></div><span class="lab">Recliners</span></div><span class="cap muted">03</span><h3 class="h4">Recliners &amp; Seating</h3><p class="bm muted">Flex-tested for daily stretch and recovery.</p></article>
+          <article class="app-card"><div class="ph"><div class="inner" data-img="ms-taupe"></div><span class="lab">Headboards</span></div><span class="cap muted">04</span><h3 class="h4">Headboards &amp; Beds</h3><p class="bm muted">Soft-touch finishes for bedroom furniture.</p></article>
+          <article class="app-card"><div class="ph"><div class="inner" data-img="ms-tan"></div><span class="lab">Floor seating</span></div><span class="cap muted">05</span><h3 class="h4">Floor Seating &amp; Poufs</h3><p class="bm muted">Rugged, stitch-friendly materials for low seating.</p></article>
+        </div>
+      </div>
+      <div class="wrap hist-meta">
+        <div class="hist-bar" style="flex:1"><i id="histBar"></i></div>
+        <span class="cap" style="letter-spacing:.08em;text-transform:uppercase">Drag / scroll&nbsp;&nbsp;→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 PERFORMANCE ATTRIBUTES -->
+  <section class="attrs wrap" id="attributes" data-fabric="#F1EEE9" data-amp=".45">
+    <div class="sec-head">
+      <div class="left"><span class="eyebrow">Performance Attributes</span><h2 class="h1 rv-h">Built to perform.<br>Designed to last.</h2></div>
+      <p class="bl muted">Every furnishing material is tested for the realities of daily use — wear, spills, sunlight and skin contact — without compromising on look and feel.</p>
+    </div>
+    <div class="attr-grid">
+      <article class="attr"><div class="ph"><div class="inner" data-img="ms-tex-performance"></div><span class="lab">Texture</span></div><span class="cap muted">01</span><h3 class="h3">Performance</h3>
+        <ul><li>Hydrolysis Resistance</li><li>Stain Protection</li><li>Dye-Resistant Options</li></ul></article>
+      <article class="attr"><div class="ph"><div class="inner" data-img="ms-tex-comfort"></div><span class="lab">Texture</span></div><span class="cap muted">02</span><h3 class="h3">Comfort</h3>
+        <ul><li>Water Resistance</li><li>Skin Friendly</li><li>Non-Allergenic</li><li>Odourless</li></ul></article>
+      <article class="attr"><div class="ph"><div class="inner" data-img="ms-tex-functionality"></div><span class="lab">Texture</span></div><span class="cap muted">03</span><h3 class="h3">Functionality</h3>
+        <ul><li>UV Resistance</li><li>Antimicrobial Protection <em>(in select styles)</em></li></ul></article>
+      <article class="attr"><div class="ph"><div class="inner" data-img="ms-tex-design"></div><span class="lab">Texture</span></div><span class="cap muted">04</span><h3 class="h3">Design</h3>
+        <ul><li>Design-Forward Selections</li></ul></article>
+    </div>
+  </section>
+
+  <!-- 06 EXPLORE — investors pattern -->
+  <section class="investors explore wrap" id="explore" data-fabric="#E4DED6" data-amp=".5">
+    <div class="inv-grid">
+      <div class="inv-img ph" id="invImg"><div class="inner" data-img="ms-tan"></div><span class="lab">Explore image</span></div>
+      <div class="inv-copy">
+        <span class="eyebrow">Explore</span>
+        <h2 class="h1 rv-h">Find the right material for your space</h2>
+        <p class="h4">Browse the Furnishing collection by finish, colour and performance, or talk to our team about custom development.</p>
+        <div class="cta"><a class="btn btn--primary" href="#attributes">View Furnishing Range <span class="arr">→</span></a><a class="btn btn--secondary" href="#contact">Request a Sample <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="wrap dark" id="contact" data-fabric="#7A0610" data-amp=".8">
+  <div class="foot-top">
+    <a href="index.html" class="logo" aria-label="Mayur Uniquoters home"><b>MAYUR</b><small>Uniquoters Ltd</small></a>
+    <div class="foot-col"><h4>Career</h4><a href="#contact">Life at Mayur</a><a href="#contact">Student Programmes</a><a href="#contact">Vacancies</a></div>
+    <div class="foot-col"><h4>FAQ</h4></div>
+    <div class="foot-col"><h4>Contact Us</h4><p style="user-select:all">+91-1423-224001</p><p style="user-select:all">info@mayur.biz</p></div>
+  </div>
+  <p class="foot-line" data-split>Engineering Material Solutions for a Changing World.</p>
+  <div class="foot-bottom"><span>Copyright © <span class="copy-year">2026</span> Mayur Uniquoters Limited, All rights reserved.</span><a href="#top" id="toTop" style="font-weight:500">Back to top ↑</a></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/market-segment.js"></script>
+<div class="veil" id="veil" aria-hidden="true"></div>
+<script src="js/transition.js"></script>
+
+</body>
+</html>
