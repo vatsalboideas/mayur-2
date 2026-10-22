@@ -12,8 +12,6 @@ $$('[data-img]').forEach(el => {
   im.onload = () => { el.style.backgroundImage = `url("${src}")`; el.classList.add('has-img'); el.closest('.ph')?.classList.add('has-img'); };
   im.src = src;
 });
-// 5P icons: hidden until the file exists (the big pillar number stays)
-$$('img[data-icon]').forEach(im => { im.onerror = () => im.remove(); im.src = IMG_DIR + im.dataset.icon + '.png'; });
 // standards logos: fall back to the framework name if the file is missing
 $$('img[data-logo]').forEach(im => {
   im.onerror = () => { const s = document.createElement('span'); s.className = 'fb'; s.textContent = im.alt; im.replaceWith(s); };
