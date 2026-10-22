@@ -314,7 +314,10 @@ header.site {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 24px
+}
+
+header.site.hdr-ready {
   transition: transform .6s cubic-bezier(.2, .7, .2, 1), background .4s, color .4s
 }
 
@@ -341,6 +344,12 @@ header.site.on-dark.is-solid {
   flex-direction: column;
   line-height: 1;
   gap: 4px
+}
+
+header.site .logo img {
+  display: block;
+  height: 48px;
+  width: auto
 }
 
 .logo b {
@@ -1460,6 +1469,16 @@ footer .logo b {
 
 .veil.in.go {
   transform: translateY(0)
+}
+
+.veil.busy {
+  pointer-events: auto
+}
+
+/* the sheet already covered the previous page, so the next one does not play it again */
+html.from-nav .veil {
+  animation: none;
+  transform: translateY(-101%)
 }
 
 @keyframes veilOut {

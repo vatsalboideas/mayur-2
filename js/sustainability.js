@@ -18,7 +18,7 @@ $$('img[data-logo]').forEach(im => {
   im.src = IMG_DIR + im.dataset.logo;
 });
 /* brand logos from Figma */
-[['#hdr .logo','logo.svg'],['footer .logo','logo-footer.svg']].forEach(([sel,file]) => {
+[['footer .logo','logo-footer.svg']].forEach(([sel,file]) => {
   const im = new Image(); im.alt = 'Mayur Uniquoters';
   im.onload = () => { const a = $(sel); a.innerHTML = ''; im.style.height = sel[0]==='#' ? '48px' : '90px'; im.style.width = 'auto'; a.appendChild(im); };
   im.src = IMG_DIR + file;
@@ -151,10 +151,17 @@ $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
 }));
 
 /* header: hide on scroll down, tint over dark sections */
-const hdr = $('#hdr'); let lastY = 0;
+const hdr = $('#hdr'); let lastY = scrollY;
+if (lastY > 80) hdr.classList.add('is-solid');
+requestAnimationFrame(() => hdr.classList.add('hdr-ready'));
 ScrollTrigger.create({ start: 0, end: 'max', onUpdate: self => {
-  const y = self.scroll(); hdr.classList.toggle('is-solid', y > 80);
-  if (mNav.hidden) hdr.classList.toggle('is-hidden', y > lastY && y > 300); lastY = y;
+  const y = self.scroll(), dy = y - lastY;
+  if (Math.abs(dy) >= 160) hdr.classList.remove('hdr-ready');
+  hdr.classList.toggle('is-solid', y > 80);
+  if (Math.abs(dy) >= 160) { void hdr.offsetWidth; hdr.classList.add('hdr-ready'); }
+  if (mNav.hidden && y > 300 && dy > 0 && dy < 160) hdr.classList.add('is-hidden');
+  else if (dy < -4 || y <= 80) hdr.classList.remove('is-hidden');
+  lastY = y;
   fabric.scroll = self.progress;
 }});
 $$('[data-dark]').forEach(s => ScrollTrigger.create({ trigger: s, start: 'top 60px', end: 'bottom 60px', toggleClass: { targets: hdr, className: 'on-dark' } }));
@@ -215,8 +222,10 @@ mm.add('(min-width: 1101px)', () => {
     gsap.to(slides[prev], { opacity: 0, y: -24 * dir, duration: .3, ease: 'power2.in' });
     gsap.fromTo(slides[i], { opacity: 0, y: 24 * dir }, { opacity: 1, y: 0, duration: .6, delay: .28, ease: 'power3.out' });
     layers.forEach((l, k) => gsap.to(l, { clipPath: k <= i ? 'inset(0% 0 0 0)' : 'inset(100% 0 0 0)', duration: 1.1, ease: 'expo.inOut', overwrite: true }));
+    layers.forEach(l => { const img = l.querySelector('img'); if (img) gsap.killTweensOf(img); });
     const ic = layers[i].querySelector('img');
-    if (ic && dir > 0) gsap.fromTo(ic, { scale: .7, rotate: -10, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: 1.3, delay: .25, ease: 'expo.out' });
+    if (ic && dir > 0) gsap.fromTo(ic, { scale: .7, rotate: -10, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: 1.3, delay: .25, ease: 'expo.out', overwrite: true, onInterrupt: () => gsap.set(ic, { scale: 1, rotate: 0, opacity: 1 }) });
+    else if (ic) gsap.set(ic, { scale: 1, rotate: 0, opacity: 1 });
     btns.forEach((b, k) => b.classList.toggle('on', k === i));
     $('#splitCount').textContent = `0${i + 1} / 05`; };
   const st = ScrollTrigger.create({ trigger: '.split5', start: 'top top', end: 'bottom bottom', pin: '.split5 .split-pin', pinSpacing: false,
@@ -293,5 +302,14 @@ const cur = $('#cursor');
 const qx = gsap.quickTo(cur, 'x', { duration: .35, ease: 'power3' }), qy = gsap.quickTo(cur, 'y', { duration: .35, ease: 'power3' });
 addEventListener('pointermove', e => { qx(e.clientX); qy(e.clientY); });
 
-addEventListener('load', () => ScrollTrigger.refresh());
+const jumpHash = () => {
+  const id = location.hash;
+  if (!id || id === '#') return;
+  const t = id === '#top' ? 0 : document.querySelector(id);
+  if (t == null) return;
+  if (lenis) lenis.scrollTo(t, { immediate: true });
+  else if (t === 0) scrollTo(0, 0);
+  else t.scrollIntoView();
+};
+addEventListener('load', () => { ScrollTrigger.refresh(); jumpHash(); });
 })();

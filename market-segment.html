@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+try { if (sessionStorage.getItem('from-nav') === '1') { sessionStorage.removeItem('from-nav'); document.documentElement.classList.add('from-nav'); } } catch (e) {}
+</script>
 <title>Furnishing — Market Segment — Mayur Uniquoters</title>
 <meta name="description" content="Furnishing materials from Mayur Uniquoters: industries, areas of application and performance attributes for residential, commercial and outdoor spaces.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +19,7 @@
 <div class="cursor" id="cursor" aria-hidden="true"><span>Drag</span></div>
 
 <header class="site" id="hdr">
-  <a href="index.html" class="logo" aria-label="Mayur Uniquoters home"><b>MAYUR</b><small>Uniquoters Ltd</small></a>
+  <a href="index.html" class="logo" aria-label="Mayur Uniquoters home"><img src="img/logo.svg" alt=""></a>
   <nav class="nav" aria-label="Primary">
     <a href="index.html#about">About</a>
     <a href="market-segment.html" class="active" aria-current="page">Market Segment</a>

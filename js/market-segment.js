@@ -20,7 +20,7 @@ $$('img[data-logo]').forEach(im => {
   im.src = IMG_DIR + im.dataset.logo;
 });
 /* brand logos from Figma */
-[['#hdr .logo','logo.svg'],['footer .logo','logo-footer.svg']].forEach(([sel,file]) => {
+[['footer .logo','logo-footer.svg']].forEach(([sel,file]) => {
   const im = new Image(); im.alt = 'Mayur Uniquoters';
   im.onload = () => { const a = $(sel); a.innerHTML = ''; im.style.height = sel[0]==='#' ? '48px' : '90px'; im.style.width = 'auto'; a.appendChild(im); };
   im.src = IMG_DIR + file;
@@ -143,10 +143,17 @@ $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
 }));
 
 /* header: hide on scroll down, tint over dark sections */
-const hdr = $('#hdr'); let lastY = 0;
+const hdr = $('#hdr'); let lastY = scrollY;
+if (lastY > 80) hdr.classList.add('is-solid');
+requestAnimationFrame(() => hdr.classList.add('hdr-ready'));
 ScrollTrigger.create({ start: 0, end: 'max', onUpdate: self => {
-  const y = self.scroll(); hdr.classList.toggle('is-solid', y > 80);
-  if (mNav.hidden) hdr.classList.toggle('is-hidden', y > lastY && y > 300); lastY = y;
+  const y = self.scroll(), dy = y - lastY;
+  if (Math.abs(dy) >= 160) hdr.classList.remove('hdr-ready');
+  hdr.classList.toggle('is-solid', y > 80);
+  if (Math.abs(dy) >= 160) { void hdr.offsetWidth; hdr.classList.add('hdr-ready'); }
+  if (mNav.hidden && y > 300 && dy > 0 && dy < 160) hdr.classList.add('is-hidden');
+  else if (dy < -4 || y <= 80) hdr.classList.remove('is-hidden');
+  lastY = y;
   fabric.scroll = self.progress;
 }});
 $$('[data-dark]').forEach(s => ScrollTrigger.create({ trigger: s, start: 'top 60px', end: 'bottom 60px', toggleClass: { targets: hdr, className: 'on-dark' } }));
@@ -280,5 +287,14 @@ const cur = $('#cursor');
 const qx = gsap.quickTo(cur, 'x', { duration: .35, ease: 'power3' }), qy = gsap.quickTo(cur, 'y', { duration: .35, ease: 'power3' });
 addEventListener('pointermove', e => { qx(e.clientX); qy(e.clientY); });
 
-addEventListener('load', () => ScrollTrigger.refresh());
+const jumpHash = () => {
+  const id = location.hash;
+  if (!id || id === '#') return;
+  const t = id === '#top' ? 0 : document.querySelector(id);
+  if (t == null) return;
+  if (lenis) lenis.scrollTo(t, { immediate: true });
+  else if (t === 0) scrollTo(0, 0);
+  else t.scrollIntoView();
+};
+addEventListener('load', () => { ScrollTrigger.refresh(); jumpHash(); });
 })();
