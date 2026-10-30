@@ -10,7 +10,7 @@ const IMG_DIR = 'img/';
 const EXT = { 'hero-sofa':'png','hero-plant':'png','hero-table':'png' };
 $$('[data-img]').forEach(el => {
   const name = el.dataset.img, ext = EXT[name] || 'jpg';
-  const src = IMG_DIR + name + '.' + ext, im = new Image();
+  const src = IMG_DIR + (/\.\w+$/.test(name) ? name : name + '.' + ext), im = new Image();
   im.onload = () => { el.style.backgroundImage = `url("${src}")`; el.classList.add('has-img'); el.closest('.ph')?.classList.add('has-img'); };
   im.src = src;
 });
@@ -177,6 +177,49 @@ const pickFabric = () => {
   gsap.to(fabric.amp, { v: +s.dataset.amp, duration: 1.6, ease: 'power2.out', overwrite: true });
 };
 gsap.ticker.add(pickFabric);
+
+/* ---------- hero carousel (layered slides, autoplay, dots) ---------- */
+(() => {
+  const root = $('[data-hero]'); if (!root) return;
+  const slides = $$('.hero-slide', root), dots = $$('.hero-dot', root), lines = $$('#heroTitle .line-mask', root);
+  if (slides.length < 2) return;
+  /* title indents per slide (em of the title size): slide 1 flush, slide 2 stepped under the car */
+  const small = matchMedia('(max-width:700px)');
+  const INDENT = () => small.matches ? [[0, 0], [1.2, 2.4]] : [[0, 0], [3.15, 5.35]];
+  const HOLD = 5000, EXIT = 1.4, ENTER = 1.4, STAGGER = .08;
+  let cur = 0, busy = false, timer = null, tl = null;
+  const layers = s => $$('.lyr', s);
+  const dist = () => Math.round(root.getBoundingClientRect().width * 1.15);
+  const setIndent = i => { gsap.set(lines[1], { marginLeft: INDENT()[i][0] + 'em' }); gsap.set(lines[2], { marginLeft: INDENT()[i][1] + 'em' }); };
+  const setDots = i => dots.forEach((d, k) => { d.classList.toggle('is-active', k === i); d.setAttribute('aria-selected', k === i); });
+  const finish = i => {
+    slides.forEach((s, k) => { s.classList.toggle('is-active', k === i); s.classList.remove('is-leaving', 'is-entering'); s.style.zIndex = ''; s.setAttribute('aria-hidden', k !== i); gsap.set(layers(s), { x: k === i ? 0 : dist() }); });
+    setDots(i); setIndent(i); cur = i; busy = false; tl = null;
+  };
+  const go = n => {
+    n = (n + slides.length) % slides.length;
+    if (n === cur || busy) return;
+    if (reduced) { finish(n); return; }
+    busy = true; stop(); tl && tl.kill();
+    const out = slides[cur], inn = slides[n], d = dist();
+    gsap.set(layers(out), { x: 0 }); gsap.set(layers(inn), { x: d });
+    out.classList.add('is-leaving'); inn.classList.add('is-entering'); out.style.zIndex = 2; inn.style.zIndex = 1;
+    tl = gsap.timeline({ defaults: { ease: 'power2.inOut', force3D: true }, onComplete: () => { finish(n); start(); } });
+    layers(out).forEach((l, i) => tl.to(l, { x: -d, duration: EXIT }, i * STAGGER));
+    layers(inn).forEach((l, i) => tl.fromTo(l, { x: d }, { x: 0, duration: ENTER, immediateRender: true }, .22 + i * STAGGER));
+    tl.to(lines[1], { marginLeft: INDENT()[n][0] + 'em', duration: ENTER }, .22).to(lines[2], { marginLeft: INDENT()[n][1] + 'em', duration: ENTER }, .22);
+    setDots(n);
+  };
+  const start = () => { if (reduced) return; stop(); timer = setInterval(() => go(cur + 1), HOLD); };
+  const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+  dots.forEach(d => d.addEventListener('click', () => { go(+d.dataset.slideTo); }));
+  root.addEventListener('keydown', e => { if (e.key === 'ArrowRight') go(cur + 1); if (e.key === 'ArrowLeft') go(cur - 1); });
+  document.addEventListener('visibilitychange', () => document.hidden ? stop() : (!busy && start()));
+  addEventListener('resize', () => { if (!busy) finish(cur); });
+  finish(0);
+  /* wait for the intro before the first autoplay tick */
+  setTimeout(start, 1800);
+})();
 
 if (reduced) { $('#histBar').style.transform = 'scaleX(1)'; return; }
 

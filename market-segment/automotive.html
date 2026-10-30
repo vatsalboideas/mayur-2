@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+try { if (sessionStorage.getItem('from-nav') === '1') { sessionStorage.removeItem('from-nav'); document.documentElement.classList.add('from-nav'); } } catch (e) {}
+</script>
+<title>Automotive — Market Segment — Mayur Uniquoters</title>
+<meta name="description" content="Automotive materials from Mayur Uniquoters: engineered material solutions for automotive interiors and accessories, serving OEM and aftermarket requirements.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/market-segment/furnishing.css">
+<link rel="stylesheet" href="../css/market-segment/automotive.css">
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor" aria-hidden="true"><span>Drag</span></div>
+
+<header class="site" id="hdr">
+  <a href="../index.html" class="logo" aria-label="Mayur Uniquoters home"><img src="../img/logo.svg" alt=""></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="../index.html#about">About</a>
+    <a href="furnishing.html" class="active" aria-current="page">Market Segment</a>
+    <a href="../our-plants.html">Plants</a>
+    <a href="../products/our-products.html">Products</a>
+    <a href="../sustainability.html">Sustainability</a>
+    <a href="../global-presence.html">Global Presence</a>
+    <a href="../news-and-media.html">News &amp; Media</a>
+  </nav>
+  <div class="hdr-right"><span class="lang">EN&nbsp;&nbsp;/&nbsp;&nbsp;<a href="../contact.html">Contact</a></span><button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav">Menu</button></div>
+</header>
+<div class="mobile-nav" id="mnav" hidden>
+  <a href="../index.html#about">About</a><a href="furnishing.html" aria-current="page">Market Segment</a><a href="../index.html#values">Values</a><a href="../index.html#history">History</a><a href="../index.html#board">Board</a><a href="../sustainability.html">Sustainability</a><a href="../index.html#investors">Investors</a><a href="../contact.html">Contact</a>
+</div>
+
+<main id="top">
+  <!-- 01 HERO — title, segment tabs, wide image -->
+  <section class="m-hero wrap" data-fabric="#F1EEE9" data-amp=".9">
+    <div class="m-hero-top">
+      <div class="left">
+        <span class="eyebrow">Market Segment</span>
+        <h1 class="display" id="heroTitle"><span class="line-mask"><span>Automotive</span></span></h1>
+      </div>
+      <p class="bl m-hero-sub">Engineered material solutions for automotive interiors and accessories, serving both OEM and aftermarket requirements across a wide range of mobility applications.</p>
+    </div>
+    <div class="m-tabs-row">
+      <div class="m-tabs" role="tablist" aria-label="Market segments">
+        <a class="chip" role="tab" aria-selected="false" href="furnishing.html">Furnishing</a>
+        <a class="chip" role="tab" aria-selected="true" aria-pressed="true" href="automotive.html">Automotive</a>
+        <a class="chip" role="tab" aria-selected="false" href="footwear.html">Footwear</a>
+        <a class="chip" role="tab" aria-selected="false" href="leather-goods.html">Leather Goods</a>
+      </div>
+      <span class="cap muted">02 / 04</span>
+    </div>
+    <div class="m-hero-img ph" id="heroImg"><div class="inner" data-img="automotive/hero"></div></div>
+  </section>
+
+  <!-- 02 OVERVIEW -->
+  <section class="overview wrap" id="overview" data-fabric="#F1EEE9" data-amp=".4">
+    <div class="ov-top">
+      <span class="eyebrow">Overview</span>
+      <div class="ov-copy">
+        <p class="h3 stmt" data-words>From everyday hatchbacks to trains and tractors, our materials bring comfort, durability and a premium finish to every kind of vehicle interior.</p>
+        <div><a class="link" href="#attributes">Explore Products <span class="arr">→</span></a></div>
+      </div>
+    </div>
+    <div class="ov-imgs">
+      <div class="ph"><div class="inner" data-img="automotive/overview-1"></div></div>
+      <div class="ph"><div class="inner" data-img="automotive/overview-2"></div></div>
+      <div class="ph"><div class="inner" data-img="automotive/overview-3"></div></div>
+    </div>
+  </section>
+
+  <!-- 03 INDUSTRIES — sticky split -->
+  <section class="split split6" id="industries" data-fabric="#E4DED6" data-amp=".35">
+    <div class="split-pin wrap">
+      <div class="split-head">
+        <span class="eyebrow">Industries</span>
+        <div class="split-arrows"><button class="icon-btn" id="pPrev" aria-label="Previous industry">←</button><button class="icon-btn icon-btn--solid" id="pNext" aria-label="Next industry">→</button></div>
+      </div>
+      <div class="split-list" role="tablist" aria-label="Industries">
+        <button class="on" data-i="0" role="tab"><span class="ar">→</span>Cars</button>
+        <button data-i="1" role="tab"><span class="ar">→</span>3 Wheelers</button>
+        <button data-i="2" role="tab"><span class="ar">→</span>2 Wheelers</button>
+        <button data-i="3" role="tab"><span class="ar">→</span>Commercial Vehicles</button>
+        <button data-i="4" role="tab"><span class="ar">→</span>Trains</button>
+        <button data-i="5" role="tab"><span class="ar">→</span>Marine</button>
+        <button data-i="6" role="tab"><span class="ar">→</span>Tractors</button>
+      </div>
+      <div class="split-copy">
+        <div class="slides">
+          <div class="slide" data-m="automotive/industry-cars"><span class="eyebrow">Cars</span><p class="h3">Seating and trim that feel premium from the first drive.</p><p class="bm muted">OEM-grade materials for seats, door panels, armrests and headliners, plus aftermarket seat covers.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="automotive/overview-1"><span class="eyebrow">3 Wheelers</span><p class="h3">Rugged seating for city rides and cargo.</p><p class="bm muted">Durable, easy-clean seat covers and trims for auto-rickshaws and three-wheeled carriers.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="automotive/overview-3"><span class="eyebrow">2 Wheelers</span><p class="h3">Grip and comfort at every turn.</p><p class="bm muted">Weather-resistant seat covers and trims for motorcycles and scooters.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="automotive/hero"><span class="eyebrow">Commercial Vehicles</span><p class="h3">Long hours, hard use, lasting finish.</p><p class="bm muted">Abrasion-resistant materials for the seats and cabins of trucks, buses and utility vehicles.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="automotive/overview-2"><span class="eyebrow">Trains</span><p class="h3">Built for millions of journeys.</p><p class="bm muted">Durable, flame-retardant upholstery for rail seating and interiors.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="automotive/texture-2"><span class="eyebrow">Marine</span><p class="h3">Stands up to sun, salt and spray.</p><p class="bm muted">UV and water-resistant upholstery for boat seating and interiors.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="automotive/texture-1"><span class="eyebrow">Tractors</span><p class="h3">Tough where it matters.</p><p class="bm muted">Hard-wearing seat and trim materials for tractors and farm equipment.</p><div><a class="link" href="#application">Read More <span class="arr">→</span></a></div></div>
+        </div>
+        <div class="split-foot">
+          <p class="bm muted">Our automotive materials are specified wherever seating needs to look good and work hard.</p>
+          <span class="cap muted" id="splitCount">01 / 07</span>
+        </div>
+      </div>
+      <div class="split-img" aria-hidden="true">
+        <div class="layer"><div class="inner" data-img="automotive/industry-cars"></div><span class="pn">01 · Cars</span></div>
+        <div class="layer"><div class="inner" data-img="automotive/overview-1"></div><span class="pn">02 · 3 Wheelers</span></div>
+        <div class="layer"><div class="inner" data-img="automotive/overview-3"></div><span class="pn">03 · 2 Wheelers</span></div>
+        <div class="layer"><div class="inner" data-img="automotive/hero"></div><span class="pn">04 · Commercial Vehicles</span></div>
+        <div class="layer"><div class="inner" data-img="automotive/overview-2"></div><span class="pn">05 · Trains</span></div>
+        <div class="layer"><div class="inner" data-img="automotive/texture-2"></div><span class="pn">06 · Marine</span></div>
+        <div class="layer"><div class="inner" data-img="automotive/texture-1"></div><span class="pn">07 · Tractors</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 AREA OF APPLICATION — dark horizontal -->
+  <section class="history application dark" id="application" data-fabric="#191516" data-amp=".7" data-dark>
+    <div class="hist-pin">
+      <div class="sec-head wrap">
+        <div class="left"><span class="eyebrow">Area of Application</span><h2 class="h1 rv-h">Where our materials live and perform</h2></div>
+        <p class="bl muted">From seats to steering wheels, our materials are engineered for the stretch, heat and daily wear of vehicle interiors — for OEM fit and the aftermarket alike.</p>
+      </div>
+      <div class="wrap" style="overflow:visible">
+        <div class="hist-track" id="histTrack">
+          <article class="app-card"><div class="ph"><div class="inner" data-img="automotive/hero" style="background-position:50% 60%"></div></div><span class="cap muted">01</span><h3 class="h4">Seat Upholstery</h3><p class="bm muted">Front and rear seats, bolsters and headrests.</p></article>
+          <article class="app-card"><div class="ph"><div class="inner" data-img="automotive/overview-2" style="background-position:50% 50%"></div></div><span class="cap muted">02</span><h3 class="h4">Door Trims &amp; Armrests</h3><p class="bm muted">Soft-touch panels that resist scuffs and sunlight.</p></article>
+          <article class="app-card"><div class="ph"><div class="inner" data-img="automotive/overview-1" style="background-position:30% 50%"></div></div><span class="cap muted">03</span><h3 class="h4">Dashboard &amp; Instrument Panel</h3><p class="bm muted">Low-gloss, heat-stable surfaces for the cockpit.</p></article>
+          <article class="app-card"><div class="ph"><div class="inner" data-img="automotive/industry-cars" style="background-position:50% 30%"></div></div><span class="cap muted">04</span><h3 class="h4">Steering &amp; Gear Wraps</h3><p class="bm muted">High-grip materials for the parts you touch most.</p></article>
+          <article class="app-card"><div class="ph"><div class="inner" data-img="automotive/overview-3" style="background-position:50% 50%"></div></div><span class="cap muted">05</span><h3 class="h4">Centre Console</h3><p class="bm muted">Hard-wearing covers for consoles and lids.</p></article>
+        </div>
+      </div>
+      <div class="wrap hist-meta">
+        <div class="hist-bar" style="flex:1"><i id="histBar"></i></div>
+        <span class="cap" style="letter-spacing:.08em;text-transform:uppercase">Drag / scroll&nbsp;&nbsp;→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 PERFORMANCE ATTRIBUTES -->
+  <section class="attrs wrap" id="attributes" data-fabric="#F1EEE9" data-amp=".45">
+    <div class="sec-head">
+      <div class="left"><span class="eyebrow">Performance Attributes</span><h2 class="h1 rv-h">Built for the road.<br>Tested for the long run.</h2></div>
+      <p class="bl muted">Vehicle interiors face constant friction, sunlight, heat and spills. Our automotive materials are engineered to meet the demanding specifications of OEMs.</p>
+    </div>
+    <div class="attr-grid attr-grid--2">
+      <article class="attr"><div class="ph"><div class="inner" data-img="automotive/texture-1"></div></div><span class="cap muted">01</span><h3 class="h3">Durability</h3>
+        <ul class="ticks"><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.25"/><path d="M7.5 12.5l3 3 6-6.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>Abrasion Resistance</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.25"/><path d="M7.5 12.5l3 3 6-6.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>Hydrolysis Resistance</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.25"/><path d="M7.5 12.5l3 3 6-6.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>Flexible Fitting</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.25"/><path d="M7.5 12.5l3 3 6-6.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>Colour Fastness</li></ul></article>
+      <article class="attr"><div class="ph"><div class="inner" data-img="automotive/texture-2"></div></div><span class="cap muted">02</span><h3 class="h3">Safety &amp; Quality</h3>
+        <ul class="ticks"><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.25"/><path d="M7.5 12.5l3 3 6-6.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>Crocking Resistance</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.25"/><path d="M7.5 12.5l3 3 6-6.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>Flame Retardant</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.25"/><path d="M7.5 12.5l3 3 6-6.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>Low VOC Emission</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.25"/><path d="M7.5 12.5l3 3 6-6.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>Optimised Backing Fabric</li></ul></article>
+    </div>
+  </section>
+
+  <!-- 06 CUSTOMERS -->
+  <section class="cust wrap" id="customers" data-fabric="#F1EEE9" data-amp=".4">
+    <div class="sec-head">
+      <div class="left"><span class="eyebrow">Our Customers</span><h2 class="h1 rv-h">Trusted by leading automakers</h2></div>
+      <p class="bl muted">Long-standing partnerships are built on trust, consistency and quality.</p>
+    </div>
+    <ul class="logo-grid" id="logoGrid">
+        <li><img src="../img/automotive/logos/logo-01.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-02.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-03.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-04.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-05.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-06.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-07.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-08.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-09.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-10.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-11.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-12.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-13.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-14.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-15.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-16.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-17.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-18.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-19.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-20.png" alt="" loading="lazy"></li>
+        <li><img src="../img/automotive/logos/logo-21.png" alt="" loading="lazy"></li>
+    </ul>
+  </section>
+
+  <!-- 07 EXPLORE — investors pattern -->
+  <section class="investors explore wrap" id="explore" data-fabric="#E4DED6" data-amp=".5">
+    <div class="inv-grid">
+      <div class="inv-img ph" id="invImg"><div class="inner" data-img="automotive/cta"></div></div>
+      <div class="inv-copy">
+        <span class="eyebrow">Explore</span>
+        <h2 class="h1 rv-h">Find the right material for your vehicle</h2>
+        <p class="h4">Explore the Automotive range by grain, colour and performance, or talk to our team about OEM development and approvals.</p>
+        <div class="cta"><a class="btn btn--primary" href="../products/our-products.html">View Automotive Range <span class="arr">→</span></a><a class="btn btn--secondary" href="../contact.html">Request a Sample <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="wrap dark" id="contact" data-fabric="#7A0610" data-amp=".8">
+  <div class="foot-top">
+    <a href="../index.html" class="logo" aria-label="Mayur Uniquoters home"><b>MAYUR</b><small>Uniquoters Ltd</small></a>
+    <div class="foot-col"><h4>Career</h4><a href="../careers.html#life">Life at Mayur</a><a href="../careers.html#join">Student Programmes</a><a href="../careers.html#join">Vacancies</a></div>
+    <div class="foot-col"><h4>FAQ</h4></div>
+    <div class="foot-col"><h4>Contact Us</h4><p style="user-select:all">+91-1423-224001</p><p style="user-select:all">info@mayur.biz</p></div>
+  </div>
+  <p class="foot-line" data-split>Engineering Material Solutions for a Changing World.</p>
+  <div class="foot-bottom"><span>Copyright © <span class="copy-year">2026</span> Mayur Uniquoters Limited, All rights reserved.</span><a href="#top" id="toTop" style="font-weight:500">Back to top ↑</a></div>
+</footer>
+
+<a class="to-top" href="#top" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<script src="../js/skeleton.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="../js/market-segment/automotive.js"></script>
+<div class="veil" id="veil" aria-hidden="true"></div>
+<script src="../js/transition.js"></script>
+
+<script src="../js/back-to-top.js"></script>
+</body>
+</html>

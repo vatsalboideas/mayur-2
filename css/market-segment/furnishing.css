@@ -16,7 +16,7 @@
 .chip.peek .soon{opacity:.6;max-width:120px}
 .m-hero-img{margin-top:clamp(28px,3vw,48px);aspect-ratio:1792/600;border-radius:16px;clip-path:inset(0 0 100% 0 round 16px)}
 .m-hero-img .inner{inset:-8% -2%;will-change:transform}
-@media (max-width:900px){.m-hero-top{grid-template-columns:1fr}.m-hero-img{aspect-ratio:4/3}.m-tabs-row .cap{display:none}}
+@media (max-width:900px){.m-hero-top{grid-template-columns:minmax(0,1fr)}.m-hero-img{aspect-ratio:4/3}.m-tabs-row .cap{display:none}}
 
 /* 02 overview */
 .overview{padding-block:clamp(64px,7vw,120px) clamp(80px,8vw,140px)}
@@ -28,7 +28,7 @@
 .ov-imgs .ph .inner{transition:scale 1.2s cubic-bezier(.2,.7,.2,1)}
 .ov-imgs .ph:hover .inner{scale:1.06}
 .ov-imgs .ph:nth-child(2){margin-top:64px}
-@media (max-width:900px){.ov-top{grid-template-columns:1fr}.ov-imgs{grid-template-columns:1fr 1fr;gap:12px}.ov-imgs .ph:nth-child(2){margin-top:32px}.ov-imgs .ph:nth-child(3){grid-column:1/-1}}
+@media (max-width:900px){.ov-top{grid-template-columns:minmax(0,1fr)}.ov-imgs{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}.ov-imgs .ph:nth-child(2){margin-top:32px}.ov-imgs .ph:nth-child(3){grid-column:1/-1}}
 
 /* 03 industries — sticky split with 6 states (home Vision/Mission pattern) */
 .split6{height:600vh}
@@ -54,14 +54,11 @@
 }
 
 /* 04 application — dark horizontal track (home History pattern) */
-.application .sec-head .h1{font-size:clamp(44px,min(5.2vw,9vh),112px)}
-.application .hist-pin{padding-block:clamp(96px,13vh,120px) clamp(28px,5vh,56px);gap:clamp(28px,4.5vh,72px)}
 .app-card{width:min(560px,80vw);flex:none;display:flex;flex-direction:column;gap:14px}
 .app-card .ph{aspect-ratio:560/440;height:auto;border-radius:16px;margin-bottom:18px}
 .app-card .ph .inner{inset:0 -8%}
 .app-card .h4{max-width:16em}
 .app-card .bm{max-width:30em}
-@media (min-width:901px){.app-card .ph{height:clamp(240px,40vh,440px);aspect-ratio:auto}}
 
 /* 05 performance attributes */
 .attrs{padding-block:clamp(100px,9vw,160px)}
@@ -75,8 +72,8 @@
 .attr li{position:relative;padding:16px 0;font-size:var(--bm)}
 .attr li::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--rule);transform-origin:left;transform:scaleX(var(--d,1))}
 .attr li em{font-style:normal;color:var(--muted)}
-@media (max-width:1100px){.attr-grid{grid-template-columns:1fr 1fr;row-gap:64px}}
-@media (max-width:560px){.attr-grid{grid-template-columns:1fr}}
+@media (max-width:1100px){.attr-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:64px}}
+@media (max-width:560px){.attr-grid{grid-template-columns:minmax(0,1fr)}}
 
 /* 06 explore CTA (home Investors pattern) */
 .explore{padding-block:clamp(80px,7vw,120px)}
@@ -89,3 +86,5 @@
   .ov-copy .stmt .w{opacity:1!important}
   .m-hero-img{clip-path:none}
 }
+
+a.chip{display:inline-flex;align-items:center}

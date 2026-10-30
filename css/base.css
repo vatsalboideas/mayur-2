@@ -474,7 +474,7 @@ section {
 
 .sec-head {
   display: grid;
-  grid-template-columns: 1fr minmax(0, 596px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 596px);
   gap: 40px 64px;
   align-items: end
 }
@@ -487,7 +487,7 @@ section {
 
 @media (max-width:900px) {
   .sec-head {
-    grid-template-columns: 1fr
+    grid-template-columns: minmax(0,1fr)
   }
 }
 
@@ -536,8 +536,11 @@ section {
 
 /* 01 hero */
 .hero {
+  --t-font: clamp(40px, min(6.4vw, 9vh), 120px);
+  --t-top: clamp(96px, 13vh, 170px);
+  --t-gap: 2.5;
   min-height: max(720px, 100svh);
-  padding-top: clamp(120px, 15vh, 170px);
+  padding-top: var(--t-top);
   padding-bottom: 40px;
   display: flex;
   flex-direction: column;
@@ -547,7 +550,11 @@ section {
 .hero .display {
   position: relative;
   z-index: 3;
-  max-width: 13.5ch
+  font-size: var(--t-font)
+}
+
+.hero .display .line-mask {
+  white-space: nowrap
 }
 
 .hero-stage {
@@ -563,29 +570,6 @@ section {
   background-repeat: no-repeat;
   background-position: center bottom;
   will-change: transform
-}
-
-.cut.sofa {
-  width: 75.5vw;
-  aspect-ratio: 1450/1130;
-  left: 15.6%;
-  bottom: 0;
-  background-position: center top
-}
-
-.cut.plant {
-  width: 18.75vw;
-  aspect-ratio: 360/504;
-  right: 2.1%;
-  bottom: 0;
-  background-position: center top
-}
-
-.cut.table {
-  width: 15.6vw;
-  aspect-ratio: 1;
-  left: 1.56%;
-  bottom: 8.6%
 }
 
 .hero-foot {
@@ -616,6 +600,118 @@ section {
   max-width: 420px
 }
 
+
+/* hero carousel: two layered slides, current set exits left, next enters from the right */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  visibility: hidden
+}
+
+.hero-slide.is-active,
+.hero-slide.is-leaving,
+.hero-slide.is-entering {
+  visibility: visible
+}
+
+.hero-slide .lyr {
+  position: absolute;
+  will-change: transform
+}
+
+.hero-slide .lyr {
+  inset: auto;
+  left: 0;
+  right: 0;
+  top: calc(var(--t-top) + var(--t-gap) * var(--t-font));
+  bottom: 48px;
+  container-type: size
+}
+
+/* slide 1 pieces: original design placement, relative to the whole hero */
+.hero-slide:not(.hero-slide--2) .lyr {
+  inset: 0;
+  container-type: normal
+}
+
+.cut.sofa {
+  width: 75.5vw;
+  aspect-ratio: 1450/1130;
+  left: 15.6%;
+  bottom: 0;
+  background-position: center top
+}
+
+.cut.plant {
+  width: 18.75vw;
+  aspect-ratio: 360/504;
+  right: 2.1%;
+  bottom: 0;
+  background-position: center top
+}
+
+.cut.table {
+  width: 15.6vw;
+  aspect-ratio: 1;
+  left: 1.56%;
+  bottom: 8.6%
+}
+
+/* slide 2 pieces are sized from the free area under the headline (cqw / cqh), so nothing collides at any screen size */
+.cut.car {
+  width: min(234.6cqh, 94cqw);
+  aspect-ratio: 1957/834;
+  right: -4cqw;
+  bottom: 0;
+  background-position: center bottom
+}
+
+.cut.box1 {
+  left: 14cqw;
+  top: 4cqh;
+  width: min(16.2cqw, 46cqh);
+  aspect-ratio: 295/297;
+  background-size: cover;
+  background-position: center
+}
+
+.cut.box2 {
+  left: 7cqw;
+  top: 50cqh;
+  width: min(21.2cqw, 56cqh);
+  aspect-ratio: 391/201;
+  background-size: cover;
+  background-position: center
+}
+
+.hero-dots {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px
+}
+
+.hero-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(20, 18, 19, .2);
+  transition: background .3s, transform .3s
+}
+
+.hero-dot:hover {
+  background: rgba(20, 18, 19, .45);
+  transform: scale(1.15)
+}
+
+.hero-dot.is-active {
+  background: var(--maroon)
+}
+
 @media (max-width:900px) {
   .cut.sofa {
     width: 118vw;
@@ -630,6 +726,54 @@ section {
   .cut.table {
     width: 28vw;
     bottom: 18%
+  }
+
+  .cut.car {
+    width: min(234.6cqh, 118cqw);
+    right: -10cqw
+  }
+
+  .cut.box1 {
+    left: 4cqw
+  }
+
+  .cut.box2 {
+    left: 2cqw
+  }
+
+  .hero-dots {
+    bottom: 76px
+  }
+}
+
+@media (max-width:700px) {
+  .hero {
+    --t-font: clamp(30px, 8.2vw, 56px);
+    --t-top: 104px;
+    --t-gap: 3.1;
+    min-height: max(580px, 76svh)
+  }
+
+  .hero-slide .lyr {
+    bottom: 72px
+  }
+
+  .cut.car {
+    width: min(234.6cqh, 150cqw);
+    right: auto;
+    left: -10cqw
+  }
+
+  .cut.box1 {
+    left: 4cqw;
+    top: 2cqh;
+    width: min(30cqw, 38cqh)
+  }
+
+  .cut.box2 {
+    left: 0;
+    top: 30cqh;
+    width: min(40cqw, 44cqh)
   }
 }
 
@@ -652,7 +796,7 @@ section {
 
 .about-imgs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0,1fr));
   gap: 24px;
   margin-top: clamp(80px, 9vw, 165px)
 }
@@ -668,11 +812,11 @@ section {
 
 @media (max-width:900px) {
   .about-top {
-    grid-template-columns: 1fr
+    grid-template-columns: minmax(0,1fr)
   }
 
   .about-imgs {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0,1fr));
     gap: 12px
   }
 
@@ -782,7 +926,7 @@ section {
 
   .split-pin {
     height: auto;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0,1fr);
     gap: 40px;
     padding-block: 96px
   }
@@ -812,7 +956,7 @@ section {
 
 .val-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, minmax(0,1fr));
   gap: 16px;
   margin-top: clamp(64px, 8vw, 160px)
 }
@@ -847,14 +991,14 @@ section {
 
 @media (max-width:1100px) {
   .val-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0,1fr));
     row-gap: 48px
   }
 }
 
 @media (max-width:560px) {
   .val-grid {
-    grid-template-columns: repeat(2, 1fr)
+    grid-template-columns: repeat(2, minmax(0,1fr))
   }
 }
 
@@ -962,7 +1106,7 @@ section {
   }
 
   .mile-body {
-    grid-template-columns: 1fr
+    grid-template-columns: minmax(0,1fr)
   }
 }
 
@@ -1007,7 +1151,7 @@ section {
 
 @media (max-width:900px) {
   .founder .content {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0,1fr);
     align-items: end;
     padding-bottom: 80px
   }
@@ -1174,13 +1318,13 @@ section {
 
 @media (max-width:1000px) {
   .pol-grid {
-    grid-template-columns: 1fr
+    grid-template-columns: minmax(0,1fr)
   }
 }
 
 @media (max-width:560px) {
   .certs {
-    grid-template-columns: 1fr
+    grid-template-columns: minmax(0,1fr)
   }
 }
 
@@ -1224,7 +1368,7 @@ section {
 
 @media (max-width:900px) {
   .inv-grid {
-    grid-template-columns: 1fr
+    grid-template-columns: minmax(0,1fr)
   }
 
   .inv-copy .cta {
@@ -1385,7 +1529,7 @@ footer .logo b {
 
 @media (max-width:900px) {
   .foot-top {
-    grid-template-columns: 1fr 1fr
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr)
   }
 
   .foot-top .logo {
@@ -1491,4 +1635,105 @@ html.from-nav .veil {
   .veil {
     display: none
   }
+}
+
+/* ---- skeleton loader (js/skeleton.js) ---- */
+@keyframes skel {
+  from { background-position: 150% 0 }
+  to { background-position: -50% 0 }
+}
+
+@keyframes skelIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+img[data-skel] {
+  min-height: 1px;
+  background-color: #E4DED6;
+  background-image: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .6) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: skel 1.4s linear infinite;
+  color: transparent
+}
+
+img.skel-done {
+  animation: skelIn .5s ease both
+}
+
+[data-skel].skel-out:not(img)::after {
+  opacity: 0;
+  transition: opacity .5s ease
+}
+
+/* background-image holders: shimmer layer on top until the picture is in */
+body :where([data-skel]:not(img)) {
+  position: relative
+}
+
+[data-skel]:not(img)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background-color: #E4DED6;
+  background-image: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .6) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: skel 1.4s linear infinite;
+  border-radius: inherit
+}
+
+.dark [data-skel]:not(img)::after,
+.dark img[data-skel] {
+  background-color: #2A2526;
+  background-image: linear-gradient(100deg, transparent 30%, rgba(244, 238, 230, .12) 50%, transparent 70%)
+}
+
+@media (prefers-reduced-motion: reduce) {
+  img[data-skel],
+  [data-skel]:not(img)::after {
+    animation: none
+  }
+}
+
+/* ---- back to top (bottom-right) ---- */
+.to-top {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right, 0px));
+  bottom: max(20px, env(safe-area-inset-bottom, 0px));
+  z-index: 60;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--maroon);
+  color: var(--cream);
+  box-shadow: 0 10px 30px -10px rgba(20, 18, 19, .45);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity .4s, transform .4s cubic-bezier(.2, .7, .2, 1), visibility .4s, background .3s
+}
+
+.to-top.is-on {
+  opacity: 1;
+  visibility: visible;
+  transform: none
+}
+
+.to-top:hover {
+  background: var(--ink);
+  transform: translateY(-3px)
+}
+
+.to-top svg {
+  width: 20px;
+  height: 20px;
+  transition: transform .3s
+}
+
+.to-top:hover svg {
+  transform: translateY(-2px)
 }

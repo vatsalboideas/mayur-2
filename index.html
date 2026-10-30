@@ -20,31 +20,42 @@ try { if (sessionStorage.getItem('from-nav') === '1') { sessionStorage.removeIte
   <a href="#top" class="logo" aria-label="Mayur Uniquoters home"><img src="img/logo.svg" alt=""></a>
   <nav class="nav" aria-label="Primary">
     <a href="#about" class="active">About</a>
-    <a href="market-segment.html">Market Segment</a>
-    <a href="#history">Plants</a>
-    <a href="#customers">Products</a>
+    <a href="market-segment/furnishing.html">Market Segment</a>
+    <a href="our-plants.html">Plants</a>
+    <a href="products/our-products.html">Products</a>
     <a href="sustainability.html">Sustainability</a>
-    <a href="#customers">Global Presence</a>
-    <a href="#investors">News &amp; Media</a>
+    <a href="global-presence.html">Global Presence</a>
+    <a href="news-and-media.html">News &amp; Media</a>
   </nav>
-  <div class="hdr-right"><span class="lang">EN&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#contact">Contact</a></span><button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav">Menu</button></div>
+  <div class="hdr-right"><span class="lang">EN&nbsp;&nbsp;/&nbsp;&nbsp;<a href="contact.html">Contact</a></span><button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav">Menu</button></div>
 </header>
 <div class="mobile-nav" id="mnav" hidden>
-  <a href="#about">About</a><a href="market-segment.html">Market Segment</a><a href="#values">Values</a><a href="#history">History</a><a href="#board">Board</a><a href="sustainability.html">Sustainability</a><a href="#investors">Investors</a><a href="#contact">Contact</a>
+  <a href="#about">About</a><a href="market-segment/furnishing.html">Market Segment</a><a href="#values">Values</a><a href="#history">History</a><a href="#board">Board</a><a href="sustainability.html">Sustainability</a><a href="#investors">Investors</a><a href="contact.html">Contact</a>
 </div>
 
 <main id="top">
   <!-- 01 HERO -->
-  <section class="hero wrap" data-fabric="#EAE5DD" data-amp="1" data-bg>
+  <section class="hero wrap" data-fabric="#EAE5DD" data-amp="1" data-bg data-hero aria-roledescription="carousel" aria-labelledby="heroTitle">
     <h1 class="display" id="heroTitle">
       <span class="line-mask"><span>Engineering Material</span></span>
       <span class="line-mask"><span>Solutions for a</span></span>
       <span class="line-mask"><span>Changing World.</span></span>
     </h1>
     <div class="hero-stage" aria-hidden="true">
-      <div class="cut sofa" data-img="hero-sofa" data-depth="0.6"></div>
-      <div class="cut plant" data-img="hero-plant" data-depth="1.1"></div>
-      <div class="cut table" data-img="hero-table" data-depth="1.4"></div>
+      <div class="hero-slide is-active">
+        <div class="lyr" data-layer><div class="cut sofa" data-img="hero-sofa" data-depth="0.6"></div></div>
+        <div class="lyr" data-layer><div class="cut plant" data-img="hero-plant" data-depth="1.1"></div></div>
+        <div class="lyr" data-layer><div class="cut table" data-img="hero-table" data-depth="1.4"></div></div>
+      </div>
+      <div class="hero-slide hero-slide--2">
+        <div class="lyr" data-layer><div class="cut box1" data-img="about/carousel/second/first-box.webp" data-depth="1.2"></div></div>
+        <div class="lyr" data-layer><div class="cut box2" data-img="about/carousel/second/second-box.webp" data-depth="1.5"></div></div>
+        <div class="lyr" data-layer><div class="cut car" data-img="about/carousel/second/car.webp" data-depth="0.6"></div></div>
+      </div>
+    </div>
+    <div class="hero-dots" role="tablist" aria-label="Hero slides">
+      <button type="button" class="hero-dot is-active" role="tab" data-slide-to="0" aria-label="Show slide 1" aria-selected="true"></button>
+      <button type="button" class="hero-dot" role="tab" data-slide-to="1" aria-label="Show slide 2" aria-selected="false"></button>
     </div>
     <div class="hero-foot">
       <div class="scroll"><div class="rule"></div><span class="cap">Scroll to discover ↓</span></div>
@@ -131,13 +142,19 @@ try { if (sessionStorage.getItem('from-nav') === '1') { sessionStorage.removeIte
       </div>
       <div class="wrap" style="overflow:visible">
         <div class="hist-track" id="histTrack">
-          <article class="mile"><div class="ph"><div class="inner" data-img="history-1994"></div><span class="lab">1994</span></div>
+          <article class="mile"><div class="ph"><div class="inner" data-img="about/history/image1.png"></div><span class="lab">1994</span></div>
             <div class="mile-body"><span class="yr">1994</span><p class="bm">Mayur Uniquoters was founded with its first manufacturing facility in Jaitpura, Jaipur.</p></div></article>
-          <article class="mile"><div class="ph"><div class="inner" data-img="history-1995"></div><span class="lab">1995</span></div>
+          <article class="mile"><div class="ph"><div class="inner" data-img="about/history/image2.png"></div><span class="lab">1995</span></div>
             <div class="mile-body"><span class="yr">1995</span><p class="bm">First export shipment, marking the beginning of our global journey.</p></div></article>
-          <article class="mile"><div class="ph"><div class="inner" data-img="history-2012"></div><span class="lab">2012</span></div>
+          <article class="mile"><div class="ph"><div class="inner" data-img="about/history/image3.png"></div><span class="lab">2012</span></div>
             <div class="mile-body"><span class="yr">2012</span><p class="bm">Established our wholly owned subsidiary in Texas, USA.</p></div></article>
-        </div>
+          <article class="mile"><div class="ph"><div class="inner" data-img="about/history/image4.png"></div><span class="lab">2015-2018</span></div>
+            <div class="mile-body"><span class="yr">2015-2018</span><p class="bm">Expanded manufacturing capabilities, strengthened quality systems and introduced new production technologies.</p></div></article>
+          <article class="mile"><div class="ph"><div class="inner" data-img="about/history/image1.png"></div><span class="lab">2019</span></div>
+            <div class="mile-body"><span class="yr">2019</span><p class="bm">Became a member of the United Nations Global Compact, reinforcing our commitment to responsible growth.</p></div></article>
+          <article class="mile"><div class="ph"><div class="inner" data-img="about/history/image2.png"></div><span class="lab">2020-2024</span></div>
+            <div class="mile-body"><span class="yr">2020-2024</span><p class="bm">Published our first Sustainability Report, expanded global operations and strengthened manufacturing infrastructure with new facilities and subsidiaries.</p></div></article>
+</div>
       </div>
       <div class="wrap hist-meta">
         <div class="hist-bar" style="flex:1"><i id="histBar"></i></div>
@@ -229,7 +246,7 @@ try { if (sessionStorage.getItem('from-nav') === '1') { sessionStorage.removeIte
 <footer class="wrap dark" id="contact" data-fabric="#7A0610" data-amp=".8">
   <div class="foot-top">
     <a href="#top" class="logo" aria-label="Back to top"><b>MAYUR</b><small>Uniquoters Ltd</small></a>
-    <div class="foot-col"><h4>Career</h4><a href="#contact">Life at Mayur</a><a href="#contact">Student Programmes</a><a href="#contact">Vacancies</a></div>
+    <div class="foot-col"><h4>Career</h4><a href="careers.html#life">Life at Mayur</a><a href="careers.html#join">Student Programmes</a><a href="careers.html#join">Vacancies</a></div>
     <div class="foot-col"><h4>FAQ</h4></div>
     <div class="foot-col"><h4>Contact Us</h4><p style="user-select:all">+91-1423-224001</p><p style="user-select:all">info@mayur.biz</p></div>
   </div>
@@ -237,6 +254,8 @@ try { if (sessionStorage.getItem('from-nav') === '1') { sessionStorage.removeIte
   <div class="foot-bottom"><span>Copyright © <span class="copy-year">2026</span> Mayur Uniquoters Limited, All rights reserved.</span><a href="#top" id="toTop" style="font-weight:500">Back to top ↑</a></div>
 </footer>
 
+<a class="to-top" href="#top" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<script src="js/skeleton.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -245,5 +264,6 @@ try { if (sessionStorage.getItem('from-nav') === '1') { sessionStorage.removeIte
 
 <div class="veil" id="veil" aria-hidden="true"></div>
 <script src="js/transition.js"></script>
+<script src="js/back-to-top.js"></script>
 </body>
 </html>

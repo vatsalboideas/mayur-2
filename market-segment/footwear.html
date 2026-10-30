@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+try { if (sessionStorage.getItem('from-nav') === '1') { sessionStorage.removeItem('from-nav'); document.documentElement.classList.add('from-nav'); } } catch (e) {}
+</script>
+<title>Footwear — Market Segment — Mayur Uniquoters</title>
+<meta name="description" content="Footwear materials from Mayur Uniquoters: Versatile PVC and PU material solutions developed for different parts of footwear, balancing everyday performance with the flexibility to respond to changing design and market requirements.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/market-segment/furnishing.css">
+<link rel="stylesheet" href="../css/market-segment/footwear.css">
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor" aria-hidden="true"><span>Drag</span></div>
+
+<header class="site" id="hdr">
+  <a href="../index.html" class="logo" aria-label="Mayur Uniquoters home"><img src="../img/logo.svg" alt=""></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="../index.html#about">About</a>
+    <a href="furnishing.html" class="active" aria-current="page">Market Segment</a>
+    <a href="../our-plants.html">Plants</a>
+    <a href="../products/our-products.html">Products</a>
+    <a href="../sustainability.html">Sustainability</a>
+    <a href="../global-presence.html">Global Presence</a>
+    <a href="../news-and-media.html">News &amp; Media</a>
+  </nav>
+  <div class="hdr-right"><span class="lang">EN&nbsp;&nbsp;/&nbsp;&nbsp;<a href="../contact.html">Contact</a></span><button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav">Menu</button></div>
+</header>
+<div class="mobile-nav" id="mnav" hidden>
+  <a href="../index.html#about">About</a><a href="furnishing.html" aria-current="page">Market Segment</a><a href="../index.html#values">Values</a><a href="../index.html#history">History</a><a href="../index.html#board">Board</a><a href="../sustainability.html">Sustainability</a><a href="../index.html#investors">Investors</a><a href="../contact.html">Contact</a>
+</div>
+
+<main id="top">
+  <!-- 01 HERO — title, segment tabs, wide image -->
+  <section class="m-hero wrap" data-fabric="#F1EEE9" data-amp=".9">
+    <div class="m-hero-top">
+      <div class="left">
+        <span class="eyebrow">Market Segment</span>
+        <h1 class="display" id="heroTitle"><span class="line-mask"><span>Footwear</span></span></h1>
+      </div>
+      <p class="bl m-hero-sub">Versatile PVC and PU material solutions developed for different parts of footwear, balancing everyday performance with the flexibility to respond to changing design and market requirements.</p>
+    </div>
+    <div class="m-tabs-row">
+      <div class="m-tabs" role="tablist" aria-label="Market segments">
+        <a class="chip" role="tab" aria-selected="false" href="furnishing.html">Furnishing</a>
+        <a class="chip" role="tab" aria-selected="false" href="automotive.html">Automotive</a>
+        <a class="chip" role="tab" aria-selected="true" aria-pressed="true" href="footwear.html">Footwear</a>
+        <a class="chip" role="tab" aria-selected="false" href="leather-goods.html">Leather Goods</a>
+      </div>
+      <span class="cap muted">03 / 04</span>
+    </div>
+    <div class="m-hero-img ph" id="heroImg"><div class="inner" data-img="footwear/hero"></div></div>
+  </section>
+
+  <!-- 02 OVERVIEW -->
+  <section class="overview wrap" id="overview" data-fabric="#F1EEE9" data-amp=".4">
+    <div class="ov-top">
+      <span class="eyebrow">Overview</span>
+      <div class="ov-copy">
+        <p class="h3 stmt" data-words>From uppers to linings and insoles, our footwear materials pair everyday comfort and durability with the flexibility to keep pace with changing design trends.</p>
+        <div><a class="link" href="#attributes">Explore Products <span class="arr">→</span></a></div>
+      </div>
+    </div>
+    <div class="ov-imgs">
+      <div class="ph"><div class="inner" data-img="footwear/overview-1"></div></div>
+      <div class="ph"><div class="inner" data-img="footwear/overview-2"></div></div>
+      <div class="ph"><div class="inner" data-img="footwear/overview-3"></div></div>
+    </div>
+  </section>
+
+  <!-- 03 INDUSTRIES — sticky split -->
+  <section class="split split6" id="industries" data-fabric="#E4DED6" data-amp=".35">
+    <div class="split-pin wrap">
+      <div class="split-head">
+        <span class="eyebrow">Industries</span>
+        <div class="split-arrows"><button class="icon-btn" id="pPrev" aria-label="Previous industry">←</button><button class="icon-btn icon-btn--solid" id="pNext" aria-label="Next industry">→</button></div>
+      </div>
+      <div class="split-list" role="tablist" aria-label="Industries">
+        <button class="on" data-i="0" role="tab"><span class="ar">→</span>Upper</button>
+        <button data-i="1" role="tab"><span class="ar">→</span>Lining</button>
+        <button data-i="2" role="tab"><span class="ar">→</span>Insole</button>
+      </div>
+      <div class="split-copy">
+        <div class="slides">
+          <div class="slide" data-m="footwear/industry"><span class="eyebrow">Upper</span><p class="h3">Materials for the visible face of the shoe — built for look, flex and everyday wear.</p><p class="bm muted">PVC and PU options across finishes, colours and grains for uppers.</p><div><a class="link" href="#attributes">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="footwear/overview-1"><span class="eyebrow">Lining</span><p class="h3">Smooth, comfortable surfaces for the inside of the shoe.</p><p class="bm muted">Lightweight PVC and PU options for linings that stay comfortable against the foot through daily wear.</p><div><a class="link" href="#attributes">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide" data-m="footwear/overview-3"><span class="eyebrow">Insole</span><p class="h3">Support and comfort underfoot, step after step.</p><p class="bm muted">Flexible, durable materials for insoles and footbeds that hold their shape through daily flex.</p><div><a class="link" href="#attributes">Read More <span class="arr">→</span></a></div></div>
+        </div>
+        <div class="split-foot">
+          <p class="bm muted">Our footwear materials are developed for every part of the shoe.</p>
+          <span class="cap muted" id="splitCount">01 / 03</span>
+        </div>
+      </div>
+      <div class="split-img" aria-hidden="true">
+        <div class="layer"><div class="inner" data-img="footwear/industry"></div><span class="pn">01 · Upper</span></div>
+        <div class="layer"><div class="inner" data-img="footwear/overview-1"></div><span class="pn">02 · Lining</span></div>
+        <div class="layer"><div class="inner" data-img="footwear/overview-3"></div><span class="pn">03 · Insole</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 PERFORMANCE ATTRIBUTES — icon grid (dark) -->
+  <section class="icons dark" id="attributes" data-fabric="#141213" data-amp=".7" data-dark>
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="left"><span class="eyebrow">Performance Attributes</span><h2 class="h1 rv-h">Built to perform.<br>Designed to last.</h2></div>
+        <p class="bl muted">Every footwear material is developed to handle daily flex, wear and cleaning — while keeping pace with changing design requirements.</p>
+      </div>
+      <ul class="icon-grid icon-grid--5" id="iconGrid">
+        <li class="ic"><span class="cap muted">01</span><img src="../img/segment-icons/abrasion-resistance.svg" alt=""><h3 class="h4">Abrasion Resistance</h3></li>
+        <li class="ic"><span class="cap muted">02</span><img src="../img/segment-icons/easy-to-clean.svg" alt=""><h3 class="h4">Easy to Clean</h3></li>
+        <li class="ic"><span class="cap muted">03</span><img src="../img/segment-icons/flexible-fitting.svg" alt=""><h3 class="h4">Flexible Fitting</h3></li>
+        <li class="ic"><span class="cap muted">04</span><img src="../img/segment-icons/colour-fastness.svg" alt=""><h3 class="h4">Colour Fastness</h3></li>
+        <li class="ic"><span class="cap muted">05</span><img src="../img/segment-icons/stain-protection.svg" alt=""><h3 class="h4">Stain Protection</h3></li>
+        <li class="ic"><span class="cap muted">06</span><img src="../img/segment-icons/flame-retardant.svg" alt=""><h3 class="h4">Flame Retardant</h3></li>
+        <li class="ic"><span class="cap muted">07</span><img src="../img/segment-icons/scratch-resistance.svg" alt=""><h3 class="h4">Scratch Resistance</h3></li>
+        <li class="ic"><span class="cap muted">08</span><img src="../img/segment-icons/optimised-backing-fabric.svg" alt=""><h3 class="h4">Optimised Backing Fabric</h3></li>
+        <li class="ic"><span class="cap muted">09</span><img src="../img/segment-icons/rapid-design-development.svg" alt=""><h3 class="h4">Rapid Design Development</h3></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 05 EXPLORE — investors pattern -->
+  <section class="investors explore wrap" id="explore" data-fabric="#E4DED6" data-amp=".5">
+    <div class="inv-grid">
+      <div class="inv-img ph" id="invImg"><div class="inner" data-img="footwear/cta"></div></div>
+      <div class="inv-copy">
+        <span class="eyebrow">Explore</span>
+        <h2 class="h1 rv-h">Find the right material for your product</h2>
+        <p class="h4">Browse the Footwear collection by finish, colour and performance, or talk to our team about custom development.</p>
+        <div class="cta"><a class="btn btn--primary" href="../products/our-products.html">View Footwear Range <span class="arr">→</span></a><a class="btn btn--secondary" href="../contact.html">Request a Sample <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="wrap dark" id="contact" data-fabric="#7A0610" data-amp=".8">
+  <div class="foot-top">
+    <a href="../index.html" class="logo" aria-label="Mayur Uniquoters home"><b>MAYUR</b><small>Uniquoters Ltd</small></a>
+    <div class="foot-col"><h4>Career</h4><a href="../careers.html#life">Life at Mayur</a><a href="../careers.html#join">Student Programmes</a><a href="../careers.html#join">Vacancies</a></div>
+    <div class="foot-col"><h4>FAQ</h4></div>
+    <div class="foot-col"><h4>Contact Us</h4><p style="user-select:all">+91-1423-224001</p><p style="user-select:all">info@mayur.biz</p></div>
+  </div>
+  <p class="foot-line" data-split>Engineering Material Solutions for a Changing World.</p>
+  <div class="foot-bottom"><span>Copyright © <span class="copy-year">2026</span> Mayur Uniquoters Limited, All rights reserved.</span><a href="#top" id="toTop" style="font-weight:500">Back to top ↑</a></div>
+</footer>
+
+<a class="to-top" href="#top" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<script src="../js/skeleton.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="../js/market-segment/footwear.js"></script>
+<div class="veil" id="veil" aria-hidden="true"></div>
+<script src="../js/transition.js"></script>
+
+<script src="../js/back-to-top.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+try { if (sessionStorage.getItem('from-nav') === '1') { sessionStorage.removeItem('from-nav'); document.documentElement.classList.add('from-nav'); } } catch (e) {}
+</script>
+<title>Global Presence — Mayur Uniquoters</title>
+<meta name="description" content="Built here, trusted everywhere. Mayur Uniquoters' client locations, offices and warehouses across the world, and the plants in India where every material begins.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/global-presence.css">
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor" aria-hidden="true"><span>Drag</span></div>
+
+<header class="site" id="hdr">
+  <a href="index.html" class="logo" aria-label="Mayur Uniquoters home"><img src="img/logo.svg" alt=""></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#about">About</a>
+    <a href="market-segment/furnishing.html">Market Segment</a>
+    <a href="our-plants.html">Plants</a>
+    <a href="products/our-products.html">Products</a>
+    <a href="sustainability.html">Sustainability</a>
+    <a href="global-presence.html" class="active" aria-current="page">Global Presence</a>
+    <a href="news-and-media.html">News &amp; Media</a>
+  </nav>
+  <div class="hdr-right"><span class="lang">EN&nbsp;&nbsp;/&nbsp;&nbsp;<a href="contact.html">Contact</a></span><button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav">Menu</button></div>
+</header>
+<div class="mobile-nav" id="mnav" hidden>
+  <a href="index.html#about">About</a><a href="market-segment/furnishing.html">Market Segment</a><a href="index.html#values">Values</a><a href="index.html#history">History</a><a href="index.html#board">Board</a><a href="sustainability.html">Sustainability</a><a href="global-presence.html" aria-current="page">Global Presence</a><a href="index.html#investors">Investors</a><a href="contact.html">Contact</a>
+</div>
+
+<main id="top">
+  <!-- 01 HERO — editorial intro + region filter -->
+  <section class="gp-hero wrap" data-fabric="#F4F2EE" data-amp=".4">
+    <div class="gp-top">
+      <div class="left">
+        <span class="eyebrow">Global Presence</span>
+        <h1 class="display" id="heroTitle">
+          <span class="line-mask"><span>Built Here.</span></span>
+          <span class="line-mask"><span>Trusted Everywhere.</span></span>
+        </h1>
+      </div>
+      <p class="bl gp-sub">From India to markets across the world, our growing global presence reflects strong partnerships, consistent quality, and solutions designed to meet diverse industry needs.</p>
+    </div>
+    <div class="gp-tabs-row">
+      <div class="gp-tabs" id="gpRegions" role="group" aria-label="Filter by region">
+        <button class="chip" aria-pressed="true" data-r="All regions">All regions</button>
+        <button class="chip" aria-pressed="false" data-r="Americas">Americas</button>
+        <button class="chip" aria-pressed="false" data-r="Europe">Europe</button>
+        <button class="chip" aria-pressed="false" data-r="Middle East & Africa">Middle East &amp; Africa</button>
+        <button class="chip" aria-pressed="false" data-r="Asia Pacific">Asia Pacific</button>
+      </div>
+      <span class="cap muted" id="gpCount">38+ Locations</span>
+    </div>
+  </section>
+
+  <!-- 02 MAP -->
+  <section class="gp-map-sec wrap" id="map" data-fabric="#F4F2EE" data-amp=".35">
+    <div class="gp-stage" id="gpStage">
+      <div class="gp-map" id="gpMap">
+        <div class="gp-zoom" id="gpZoom">
+          <img src="img/global-presence/map.svg" alt="World map showing Mayur Uniquoters client, office and warehouse locations" width="1823" height="997">
+          <div class="gp-pins" id="gpPins"></div>
+        </div>
+      </div>
+      <button class="gp-full" id="gpFull" type="button">Full view</button>
+      <div class="gp-ui">
+        <div class="chooser" data-chooser>
+          <button class="chooser-select" type="button" aria-haspopup="listbox" aria-expanded="false"><span><span class="l">Choose a location</span><span class="chooser-name">India</span></span>
+            <svg class="chooser-chev" viewBox="0 0 14 8" fill="none" aria-hidden="true"><path d="M1 1.25 7 6.75l6-5.5" stroke="#84000C" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="chooser-go" type="button" aria-label="View next location">→</button>
+          <ul class="chooser-menu" role="listbox" aria-label="Locations" hidden data-lenis-prevent></ul>
+        </div>
+        <ul class="gp-legend" aria-label="Map legend">
+          <li><i class="d d--client"></i>Our Clients</li>
+          <li><i class="d d--office"></i>Office / Warehouse</li>
+          <li><i class="d d--hub"></i>Office / Warehouse &amp; Clients</li>
+        </ul>
+      </div>
+    </div>
+    <section class="gp-details" id="gpDetails" hidden>
+      <h2 class="h3" id="gpDetailsTitle">Locations</h2>
+      <ul class="gp-cards" id="gpCards"></ul>
+    </section>
+  </section>
+
+  <!-- 03 REACH IN NUMBERS -->
+  <section class="reach wrap" id="reach" data-fabric="#E9E5DF" data-amp=".4">
+    <div class="reach-top">
+      <span class="eyebrow">Our Reach</span>
+      <p class="bl">A network built around our customers — clients, offices and warehouses across continents.</p>
+    </div>
+    <div class="reach-grid">
+      <div class="stat"><div class="rule"></div><span class="cap muted">01</span><span class="num" data-n="38" data-suf="+">38+</span><span class="bl muted">Global client locations</span></div>
+      <div class="stat"><div class="rule"></div><span class="cap muted">02</span><span class="num" data-n="8">8</span><span class="bl muted">Office and warehouse facilities</span></div>
+      <div class="stat"><div class="rule"></div><span class="cap muted">03</span><span class="num" data-n="3">3</span><span class="bl muted">Office, warehouse &amp; client hubs</span></div>
+    </div>
+  </section>
+
+  <!-- 04 BUILT HERE — plants (dark) -->
+  <section class="gp-plants dark" id="plants" data-fabric="#191516" data-amp=".7" data-dark>
+    <div class="wrap">
+      <div class="gp-top">
+        <div class="left"><span class="eyebrow">Built Here</span><h2 class="h1 rv-h">Made in India.<br>Delivered worldwide.</h2></div>
+        <p class="bl muted">Every material we ship begins at one of our three manufacturing facilities in India.</p>
+      </div>
+      <div class="gp-plants-grid">
+        <article class="gp-plant"><div class="ph"><div class="inner" style="background-image:url('img/global-presence/plant-jaitpura.webp')"></div></div><span class="cap muted">01</span><h3 class="h4">Jaitpura Plant</h3><span class="bm muted">Jaipur, Rajasthan</span></article>
+        <article class="gp-plant"><div class="ph"><div class="inner" style="background-image:url('img/global-presence/plant-dhodhsar.webp')"></div></div><span class="cap muted">02</span><h3 class="h4">Dhodhsar Plant</h3><span class="bm muted">Rajasthan</span></article>
+        <article class="gp-plant"><div class="ph"><div class="inner" style="background-image:url('img/global-presence/plant-morena.webp')"></div></div><span class="cap muted">03</span><h3 class="h4">Morena Plant</h3><span class="bm muted">Madhya Pradesh</span></article>
+      </div>
+      <a class="btn btn--ondark" href="index.html#history">Explore Our Plants <span class="arr">→</span></a>
+    </div>
+  </section>
+
+  <!-- 05 FIND A PARTNER -->
+  <section class="partner wrap" id="partner" data-fabric="#E4DED6" data-amp=".5">
+    <div class="partner-grid">
+      <div class="partner-copy">
+        <span class="eyebrow">Get in Touch</span>
+        <h2 class="h1 rv-h">Looking for a partner near you?</h2>
+        <p class="bl">Choose a location to find the nearest Mayur office or warehouse, or talk to our team directly.</p>
+        <div class="cta"><a class="btn btn--primary" href="#contact">Contact Us <span class="arr">→</span></a><a class="btn btn--secondary" href="#map">Choose a Location <span class="arr">→</span></a></div>
+      </div>
+      <div class="chooser" data-chooser data-scroll>
+        <button class="chooser-select" type="button" aria-haspopup="listbox" aria-expanded="false"><span><span class="l">Choose a location</span><span class="chooser-name">India</span></span>
+          <svg class="chooser-chev" viewBox="0 0 14 8" fill="none" aria-hidden="true"><path d="M1 1.25 7 6.75l6-5.5" stroke="#84000C" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="chooser-go" type="button" aria-label="Show on map">→</button>
+        <ul class="chooser-menu" role="listbox" aria-label="Locations" hidden data-lenis-prevent></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="wrap dark" id="contact" data-fabric="#7A0610" data-amp=".8">
+  <div class="foot-top">
+    <a href="index.html" class="logo" aria-label="Mayur Uniquoters home"><b>MAYUR</b><small>Uniquoters Ltd</small></a>
+    <div class="foot-col"><h4>Career</h4><a href="careers.html#life">Life at Mayur</a><a href="careers.html#join">Student Programmes</a><a href="careers.html#join">Vacancies</a></div>
+    <div class="foot-col"><h4>FAQ</h4></div>
+    <div class="foot-col"><h4>Contact Us</h4><p style="user-select:all">+91-1423-224001</p><p style="user-select:all">info@mayur.biz</p></div>
+  </div>
+  <p class="foot-line" data-split>Engineering Material Solutions for a Changing World.</p>
+  <div class="foot-bottom"><span>Copyright © <span class="copy-year">2026</span> Mayur Uniquoters Limited, All rights reserved.</span><a href="#top" id="toTop" style="font-weight:500">Back to top ↑</a></div>
+</footer>
+
+<a class="to-top" href="#top" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<script src="js/skeleton.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/presence-data.js"></script>
+<script src="js/global-presence.js"></script>
+<div class="veil" id="veil" aria-hidden="true"></div>
+<script src="js/transition.js"></script>
+
+<script src="js/back-to-top.js"></script>
+</body>
+</html>

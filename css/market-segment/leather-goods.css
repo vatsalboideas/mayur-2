@@ -1,0 +1,18 @@
+/* ================= Market Segment — icon-grid variant (Footwear / Leather Goods) — extras on top of market-segment.css ================= */
+a.chip{display:inline-flex;align-items:center}
+.m-tabs a.chip[aria-selected="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.dark .muted{color:#A9A19A}
+
+/* performance attributes — dark icon grid */
+.icons{background:rgba(20,18,19,.94);padding-block:clamp(80px,9vw,160px)}
+.icons .sec-head .h1{max-width:none}
+.icon-grid{list-style:none;margin:clamp(48px,5vw,96px) 0 0;padding:0;display:grid;gap:16px}
+.icon-grid--5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.icon-grid--4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ic{background:#1E1A1B;border:1px solid rgba(244,238,230,.06);border-radius:12px;padding:28px;min-height:clamp(240px,14.6vw,280px);display:flex;flex-direction:column;gap:16px;transition:transform .5s cubic-bezier(.2,.7,.2,1),border-color .4s,background .4s}
+.ic:hover{transform:translateY(-6px);border-color:rgba(244,238,230,.25);background:#241F20}
+.ic img{margin-top:auto;height:64px;width:auto;max-width:72px;object-fit:contain;object-position:left}
+.ic h3{margin:8px 0 0;font-size:clamp(18px,1.25vw,24px);font-weight:400}
+@media (max-width:1200px){.icon-grid--5,.icon-grid--4{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:800px){.icon-grid--5,.icon-grid--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.icon-grid--5,.icon-grid--4{grid-template-columns:minmax(0,1fr)}}

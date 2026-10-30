@@ -21,8 +21,8 @@
 .ap-copy .stmt .w{opacity:.16}
 .ap-img{aspect-ratio:616/880;border-radius:16px;clip-path:inset(10% 10% 10% 10% round 16px)}
 .ph .inner{position:absolute;inset:-10% 0;background-size:cover;background-position:center}
-@media (max-width:1100px){.approach{grid-template-columns:1fr 1fr}.ap-img{grid-column:1/-1;aspect-ratio:4/3}}
-@media (max-width:700px){.approach{grid-template-columns:1fr}}
+@media (max-width:1100px){.approach{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.ap-img{grid-column:1/-1;aspect-ratio:4/3}}
+@media (max-width:700px){.approach{grid-template-columns:minmax(0,1fr)}}
 
 /* 03 5P — sticky split with 5 states */
 .split5{height:500vh}
@@ -47,20 +47,18 @@
 }
 
 /* 04 impact — reuses .history horizontal track */
-.ini{width:min(560px,80vw);flex:none;border-radius:20px;background:#1E1A1B;border:1px solid rgba(244,238,230,.08);padding:clamp(24px,2vw,40px);display:flex;flex-direction:column;gap:14px;height:clamp(380px,46vh,560px)}
+.ini{width:min(560px,80vw);flex:none;border-radius:20px;background:#1E1A1B;border:1px solid rgba(244,238,230,.08);padding:clamp(24px,2vw,40px);display:flex;flex-direction:column;gap:14px}
 .ini .h4{max-width:16em}
 .ini--img{width:min(760px,85vw);padding:20px}
 .ini--img .ph{flex:1;border-radius:12px}
-.stats{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:36px 28px}
+.stats{margin-top:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px 28px}
 .stats>div{display:flex;flex-direction:column;gap:8px}
-.stats.s1{grid-template-columns:1fr}
+.stats.s1{grid-template-columns:minmax(0,1fr)}
 .num{display:block;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
 .impact .sec-head .h1{max-width:none}
-.impact .hist-pin{padding-block:clamp(96px,13vh,120px) clamp(28px,5vh,56px);gap:clamp(28px,4.5vh,72px)}
-.impact .sec-head .h1{font-size:clamp(44px,min(5.2vw,9vh),112px)}
-.stats{gap:clamp(18px,3vh,36px) 28px}
-.stats .h2{font-size:clamp(34px,min(3.33vw,6vh),64px)}
-.stats .h1{font-size:clamp(48px,min(5.83vw,10vh),112px)}
+.stats{gap:clamp(12px,2.4svh,36px) 28px}
+.stats .h2{font-size:clamp(28px,min(3.33vw,5svh),64px)}
+.stats .h1{font-size:clamp(40px,min(5.83vw,8svh),112px)}
 @media (max-width:900px){.ini{height:auto;min-height:420px}}
 
 /* 05 standards — policies pattern with logo cards */
@@ -74,7 +72,7 @@
 .std .meta{display:flex;flex-direction:column;gap:4px}
 .std .name{font-size:var(--bl);font-weight:500}
 .std.dim{filter:grayscale(1)}
-@media (max-width:560px){.stds{grid-template-columns:1fr}}
+@media (max-width:560px){.stds{grid-template-columns:minmax(0,1fr)}}
 
 /* 06 journey — investors pattern, two CTAs */
 .investors .cta{display:flex;flex-wrap:wrap;gap:16px}

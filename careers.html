@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+try { if (sessionStorage.getItem('from-nav') === '1') { sessionStorage.removeItem('from-nav'); document.documentElement.classList.add('from-nav'); } } catch (e) {}
+</script>
+<title>Careers — Mayur Uniquoters</title>
+<meta name="description" content="Build more than a career at Mayur Uniquoters. Our culture, life at Mayur and how to join a team driven by innovation, quality and continuous growth.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/careers.css">
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor" aria-hidden="true"><span>Drag</span></div>
+
+<header class="site" id="hdr">
+  <a href="index.html" class="logo" aria-label="Mayur Uniquoters home"><img src="img/logo.svg" alt=""></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#about">About</a>
+    <a href="market-segment/furnishing.html">Market Segment</a>
+    <a href="our-plants.html">Plants</a>
+    <a href="products/our-products.html">Products</a>
+    <a href="sustainability.html">Sustainability</a>
+    <a href="global-presence.html">Global Presence</a>
+    <a href="news-and-media.html">News &amp; Media</a>
+  </nav>
+  <div class="hdr-right"><span class="lang">EN&nbsp;&nbsp;/&nbsp;&nbsp;<a href="contact.html">Contact</a></span><button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav">Menu</button></div>
+</header>
+<div class="mobile-nav" id="mnav" hidden>
+  <a href="index.html#about">About</a><a href="market-segment/furnishing.html">Market Segment</a><a href="index.html#values">Values</a><a href="index.html#history">History</a><a href="index.html#board">Board</a><a href="sustainability.html">Sustainability</a><a href="careers.html" aria-current="page">Careers</a><a href="index.html#investors">Investors</a><a href="contact.html">Contact</a>
+</div>
+
+<main id="top">
+  <!-- 01 HERO — full bleed -->
+  <section class="s-hero c-hero" data-fabric="#EAE5DD" data-amp="1">
+    <div class="s-hero-media">
+      <div class="bg" style="background-image:url('img/careers/hero.webp')" role="img" aria-label="Mayur Uniquoters team collaborating in a modern office"></div>
+      <div class="shade"></div>
+      <div class="s-hero-content wrap">
+        <span class="eyebrow">Careers</span>
+        <div class="c-hero-row">
+          <h1 class="display" id="heroTitle">
+            <span class="line-mask"><span>Build More</span></span>
+            <span class="line-mask"><span>Than a Career</span></span>
+          </h1>
+          <p class="bm c-hero-sub">Join a team driven by innovation, quality and continuous growth. At Mayur Uniquoters, every role contributes to building material solutions trusted by industries across the world.</p>
+        </div>
+        <div class="hero-foot">
+          <div class="scroll"><div class="rule"></div><span class="cap">Scroll to discover ↓</span></div>
+          <a class="cap link-u" href="#join">Join our team</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 WHY MAYUR -->
+  <section class="approach wrap" id="why" data-fabric="#F1EEE9" data-amp=".4">
+    <div class="ap-title">
+      <span class="eyebrow">Why Mayur</span>
+      <h2 class="h1 rv-h"><span class="ar">→</span>Why<br>Mayur?</h2>
+    </div>
+    <div class="ap-copy">
+      <div class="c-why-copy">
+        <p class="bl stmt" data-words>At Mayur Uniquoters, people are at the heart of everything we do. We believe in creating an environment where individuals are empowered to learn, collaborate and grow while contributing to meaningful work.</p>
+        <p class="bl stmt" data-words>By fostering innovation, encouraging continuous development and prioritising employee well-being, we strive to build careers that grow alongside our business.</p>
+      </div>
+      <div><a class="btn btn--secondary" href="#join">View Openings <span class="arr">→</span></a></div>
+    </div>
+    <div class="ap-img ph" id="apImg"><div class="inner" style="background-image:url('img/careers/why.webp')" role="img" aria-label="Mayur Uniquoters colleagues walking and talking in a modern office"></div></div>
+  </section>
+
+  <!-- 03 OUR CULTURE — sticky split -->
+  <section class="split split4" id="culture" data-fabric="#E4DED6" data-amp=".35">
+    <div class="split-pin wrap">
+      <div class="split-head">
+        <span class="eyebrow">Our Culture</span>
+        <div class="split-arrows"><button class="icon-btn" id="pPrev" aria-label="Previous value">←</button><button class="icon-btn icon-btn--solid" id="pNext" aria-label="Next value">→</button></div>
+      </div>
+      <div class="split-list" role="tablist" aria-label="Our values">
+        <button class="on" data-i="0" role="tab"><span class="ar">→</span>Responsibility</button>
+        <button data-i="1" role="tab"><span class="ar">→</span>Innovation</button>
+        <button data-i="2" role="tab"><span class="ar">→</span>Quality</button>
+        <button data-i="3" role="tab"><span class="ar">→</span>People</button>
+      </div>
+      <div class="split-copy">
+        <div class="slides">
+          <div class="slide"><span class="eyebrow">Shared value 01</span><p class="h3">A Culture Built on Shared Values.</p><div><a class="link" href="#life">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide"><span class="eyebrow">Shared value 02</span><p class="h3">A Culture Built on Shared Values.</p><div><a class="link" href="#life">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide"><span class="eyebrow">Shared value 03</span><p class="h3">A Culture Built on Shared Values.</p><div><a class="link" href="#life">Read More <span class="arr">→</span></a></div></div>
+          <div class="slide"><span class="eyebrow">Shared value 04</span><p class="h3">A Culture Built on Shared Values.</p><div><a class="link" href="#life">Read More <span class="arr">→</span></a></div></div>
+        </div>
+        <div class="split-foot">
+          <p class="bm muted">We are guided by values that shape how we work, collaborate and innovate every day.</p>
+          <span class="cap muted" id="splitCount">01 / 04</span>
+        </div>
+      </div>
+      <div class="split-img pillar-stage" aria-hidden="true">
+        <div class="layer"><img src="img/careers/val-responsibility.svg" alt=""><span class="pn">01</span></div>
+        <div class="layer"><img src="img/careers/val-innovation.svg" alt=""><span class="pn">02</span></div>
+        <div class="layer"><img src="img/careers/val-quality.svg" alt=""><span class="pn">03</span></div>
+        <div class="layer"><img src="img/careers/val-people.svg" alt=""><span class="pn">04</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 LIFE AT MAYUR — dark horizontal -->
+  <section class="history impact dark" id="life" data-fabric="#191516" data-amp=".7" data-dark>
+    <div class="hist-pin">
+      <div class="sec-head wrap">
+        <div class="left"><span class="eyebrow">Life at Mayur</span><h2 class="h1 rv-h">Learning,<br>teamwork, growth</h2></div>
+        <p class="bl muted">From collaborative teams to meaningful milestones, life at Mayur is shaped by learning, teamwork and a shared commitment to excellence.</p>
+      </div>
+      <div class="wrap" style="overflow:visible">
+        <div class="hist-track" id="histTrack">
+          <article class="life"><div class="ph"><div class="inner" style="background-image:url('img/careers/life-1.jpg')" role="img" aria-label="Colleagues collaborating around a laptop"></div></div><span class="cap muted">01</span><h3 class="h4">Collaborative teams</h3></article>
+          <article class="life"><div class="ph"><div class="inner" style="background-image:url('img/careers/life-2.jpg')" role="img" aria-label="Colleagues sharing a moment over coffee"></div></div><span class="cap muted">02</span><h3 class="h4">Shared moments</h3></article>
+          <article class="life"><div class="ph"><div class="inner" style="background-image:url('img/careers/life-3.jpg')" role="img" aria-label="A learning session in a meeting room"></div></div><span class="cap muted">03</span><h3 class="h4">Learning together</h3></article>
+        </div>
+      </div>
+      <div class="wrap hist-meta">
+        <div class="hist-bar" style="flex:1"><i id="histBar"></i></div>
+        <span class="cap" style="letter-spacing:.08em;text-transform:uppercase">Drag / scroll&nbsp;&nbsp;→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 JOIN OUR TEAM — form (Option A) -->
+  <section class="join wrap" id="join" data-fabric="#E4DED6" data-amp=".5">
+    <div class="join-grid">
+      <div class="join-copy">
+        <span class="eyebrow">Current Openings</span>
+        <h2 class="h1 rv-h">Join<br>Our Team</h2>
+        <p class="bl">We’re always looking for passionate individuals who are ready to grow with us.</p>
+        <div class="join-mail"><div class="rule"></div><span class="cap muted">Prefer email?</span><a class="h4" href="mailto:info@mayur.biz">info@mayur.biz</a></div>
+      </div>
+      <form class="join-form" action="#" method="post" data-openings-form novalidate>
+        <div class="f-row">
+          <label class="f"><span class="cap muted">First Name</span><input type="text" name="firstName" autocomplete="given-name" required></label>
+          <label class="f"><span class="cap muted">Last Name</span><input type="text" name="lastName" autocomplete="family-name" required></label>
+        </div>
+        <div class="f-row">
+          <label class="f"><span class="cap muted">Email</span><input type="email" name="email" autocomplete="email" required></label>
+          <label class="f"><span class="cap muted">Phone Number</span><input type="tel" name="phone" autocomplete="tel"></label>
+        </div>
+        <label class="f"><span class="cap muted">Subject</span>
+          <span class="sel"><select name="subject" required>
+            <option value="" selected disabled></option>
+            <option value="open-application">Open Application</option>
+            <option value="manufacturing">Manufacturing</option>
+            <option value="quality">Quality &amp; R&amp;D</option>
+            <option value="sales">Sales &amp; Marketing</option>
+            <option value="other">Other</option>
+          </select><svg viewBox="0 0 14 8" fill="none" aria-hidden="true"><path d="M1 1.25 7 6.75l6-5.5" stroke="#141213" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+        <label class="f"><span class="cap muted">Message</span><textarea name="message" rows="6" required></textarea></label>
+        <div class="f-actions"><button class="btn btn--dark" type="submit">Send Message <span class="arr">→</span></button><p class="bm f-status" data-openings-status role="status" hidden></p></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="wrap dark" id="contact" data-fabric="#7A0610" data-amp=".8">
+  <div class="foot-top">
+    <a href="index.html" class="logo" aria-label="Mayur Uniquoters home"><b>MAYUR</b><small>Uniquoters Ltd</small></a>
+    <div class="foot-col"><h4>Career</h4><a href="#life">Life at Mayur</a><a href="#join">Student Programmes</a><a href="#join">Vacancies</a></div>
+    <div class="foot-col"><h4>FAQ</h4></div>
+    <div class="foot-col"><h4>Contact Us</h4><p style="user-select:all">+91-1423-224001</p><p style="user-select:all">info@mayur.biz</p></div>
+  </div>
+  <p class="foot-line" data-split>Engineering Material Solutions for a Changing World.</p>
+  <div class="foot-bottom"><span>Copyright © <span class="copy-year">2026</span> Mayur Uniquoters Limited, All rights reserved.</span><a href="#top" id="toTop" style="font-weight:500">Back to top ↑</a></div>
+</footer>
+
+<a class="to-top" href="#top" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<script src="js/skeleton.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/careers.js"></script>
+<div class="veil" id="veil" aria-hidden="true"></div>
+<script src="js/transition.js"></script>
+
+<script src="js/back-to-top.js"></script>
+</body>
+</html>
