@@ -119,3 +119,6 @@
 .cta-copy .bl{margin:0;max-width:520px}
 .cta-copy .cta{display:flex;flex-wrap:wrap;gap:16px}
 @media (max-width:1000px){.cta-grid{grid-template-columns:minmax(0,1fr)}.cta-img{aspect-ratio:4/3}}
+
+/* keep the map tag inside the screen on narrow widths */
+@media (max-width:700px){.rm-tag{transform:translate(calc(-100% + 8px),-210%)}}

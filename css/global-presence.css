@@ -134,3 +134,8 @@
 .gp-plants,.gp-plants .eyebrow,.gp-plants .h1,.gp-plants .h4,.gp-plants .bl,.gp-plants .bm,.gp-plants .cap,.gp-plants .muted,.dark.gp-plants .muted,.gp-plants .btn{color:#fff}
 .gp-plants .btn{border-color:rgba(255,255,255,.6)}
 .gp-plants .btn:hover{background:#fff;color:var(--ink)}
+
+/* map runs edge to edge; its controls and the cards below stay on the container */
+.gp-stage{margin-inline:calc(var(--cpad) * -1);border-radius:0}
+.gp-ui{left:var(--cpad);right:var(--cpad)}
+@media (max-width:700px){.gp-ui{left:0;right:0;padding-inline:var(--cpad)}}
