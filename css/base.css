@@ -1737,3 +1737,195 @@ body :where([data-skel]:not(img)) {
 .to-top:hover svg {
   transform: translateY(-2px)
 }
+
+/* ---- history: responsive for smaller heights / narrow cards (additive; the rules above are untouched) ---- */
+.mile {
+  container-type: inline-size
+}
+
+@container (max-width: 560px) {
+  .mile-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px
+  }
+
+  .mile .yr {
+    font-size: clamp(28px, 9cqw, 48px)
+  }
+}
+
+@media (min-width: 901px) and (max-height: 1040px) {
+  .history .hist-pin {
+    padding-block: clamp(102px, 12svh, 120px) clamp(20px, 4svh, 64px);
+    gap: clamp(18px, 4svh, 96px)
+  }
+
+  .history .sec-head {
+    gap: clamp(10px, 2svh, 40px) 64px
+  }
+
+  .history .sec-head .left {
+    gap: clamp(6px, 1.4svh, 16px)
+  }
+
+  .history .sec-head .h1 {
+    font-size: clamp(40px, min(5.83vw, 9.5svh), 112px)
+  }
+
+  .history .sec-head .bl {
+    font-size: clamp(14px, min(1.04vw, 2.4svh), 20px);
+    line-height: 1.45
+  }
+
+  /* card width follows the free height so the whole card stays on screen */
+  .mile {
+    width: min(700px, 80vw, max(300px, calc(124svh - 452px)));
+    gap: clamp(12px, 3svh, 30px);
+    padding: clamp(12px, 2.4svh, 20px)
+  }
+
+  .mile .yr {
+    font-size: clamp(28px, min(var(--h2), 5.6svh), 64px)
+  }
+
+  .mile-body {
+    padding-bottom: clamp(6px, 2svh, 24px)
+  }
+}
+
+/* very short windows: flatter pictures and tighter copy so the whole card + progress bar stay in view */
+@media (min-width: 901px) and (max-height: 680px) {
+  .history .hist-pin {
+    gap: 14px
+  }
+
+  .history .sec-head .bl {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 13px
+  }
+
+  .mile {
+    width: min(700px, 80vw, max(280px, calc(124svh - 452px)))
+  }
+
+  .mile .ph {
+    aspect-ratio: 660/250
+  }
+
+  .mile-body p {
+    font-size: 13.5px;
+    line-height: 1.4
+  }
+
+  .mile .yr {
+    font-size: clamp(24px, 4.6svh, 40px)
+  }
+}
+
+/* ---- header logo follows the background: white on dark sections, original on light ---- */
+header.site .logo img {
+  transition: filter .4s
+}
+
+header.site.on-dark .logo img {
+  filter: brightness(0) invert(1)
+}
+
+/* ---- policies & certificates: cards size to their content instead of stretching to the left column (additive) ---- */
+.certs {
+  /* the group is as tall as its content (not stretched to the left column); both cards share the taller one's height */
+  align-self: start;
+  align-items: stretch
+}
+
+.cert {
+  height: auto
+}
+
+@media (max-width: 1000px) {
+  .certs {
+    width: 100%;
+    max-width: 760px
+  }
+
+  .cert {
+    padding: clamp(16px, 3.4vw, 32px);
+    gap: clamp(16px, 3vw, 32px)
+  }
+
+  .cert .name {
+    font-size: clamp(17px, 2.4vw, 22px)
+  }
+}
+
+@media (max-width: 560px) {
+  .cert .ph {
+    width: 100%;
+    max-height: 72svh;
+    margin-inline: auto
+  }
+}
+
+/* ---- footer top row: four equal columns, logo and text columns all left-aligned (additive) ---- */
+@media (min-width: 901px) {
+  .foot-top {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: clamp(24px, 3vw, 64px);
+    align-items: start;
+    justify-items: start
+  }
+
+  .foot-top .logo {
+    justify-self: start
+  }
+}
+
+/* ---- Tailwind-style container (home page) ----
+   fluid up to the top breakpoint (2xl = 1536px), then centred; padding keeps elements with their own
+   background full-bleed while their content sits inside the container */
+:root {
+  --container-max: 1536px;
+  --cpad: max(var(--gut), env(safe-area-inset-left, 0px), calc((100vw - var(--container-max)) / 2))
+}
+
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-left: var(--cpad);
+  padding-right: var(--cpad)
+}
+
+body.home header.site {
+  padding-left: var(--cpad);
+  padding-right: var(--cpad)
+}
+
+body.home .mobile-nav {
+  padding-left: var(--cpad);
+  padding-right: var(--cpad)
+}
+
+/* ---- home: Vision / Mission / Values — one shared top line; counter sits on the picture's bottom edge (additive) ---- */
+#split .split-pin {
+  align-items: start;
+  align-content: start
+}
+
+#split .split-list {
+  /* pull the big first word up so its cap-height sits on the same line as the eyebrow and the picture */
+  margin-top: calc(clamp(48px, 5vw, 112px) * -.15);
+  align-self: start
+}
+
+#split .split-copy {
+  align-self: stretch;
+  padding-block: 0
+}
+
+#split .split-img {
+  align-self: start
+}
+

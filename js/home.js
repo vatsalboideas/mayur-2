@@ -317,7 +317,8 @@ gsap.from('.bm-card', { y: 90, opacity: 0, duration: 1.3, stagger: .09, ease: 'e
 /* ---------- certificates: float + 3D tilt ---------- */
 gsap.from('.cert', { y: 120, rotateX: 14, opacity: 0, duration: 1.4, stagger: .12, ease: 'expo.out', scrollTrigger: { trigger: '.certs', start: 'top 85%' } });
 $$('.cert').forEach((c, i) => {
-  gsap.to(c, { yPercent: i ? -10 : 6, ease: 'none', scrollTrigger: { trigger: '.policies', start: 'top bottom', end: 'bottom top', scrub: true } });
+  /* single column (phones): no float, so the stacked cards never overlap */
+  gsap.to(c, { yPercent: matchMedia('(max-width:560px)').matches ? 0 : (i ? -10 : 6), ease: 'none', scrollTrigger: { trigger: '.policies', start: 'top bottom', end: 'bottom top', scrub: true } });
   c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
     gsap.to(c, { rotateY: x * 10, rotateX: -y * 10, duration: .6, ease: 'power3.out' }); });
   c.addEventListener('pointerleave', () => gsap.to(c, { rotateY: 0, rotateX: 0, duration: .9, ease: 'elastic.out(1,.6)' }));
