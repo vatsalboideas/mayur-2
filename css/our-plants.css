@@ -120,5 +120,27 @@
 .cta-copy .cta{display:flex;flex-wrap:wrap;gap:16px}
 @media (max-width:1000px){.cta-grid{grid-template-columns:minmax(0,1fr)}.cta-img{aspect-ratio:4/3}}
 
+/* capabilities is pinned to the viewport. Short windows shrink type, spacing and cards
+   so the band stays in view. Tall screens keep the original size. */
+@media (min-width:901px) and (max-height:1280px){
+  #capabilities .hist-pin{padding-block:clamp(92px,10svh,120px) clamp(16px,3svh,40px);gap:clamp(14px,2.6svh,48px)}
+  #capabilities .sec-head{gap:clamp(12px,2svh,40px) clamp(24px,3vw,64px)}
+  #capabilities .sec-head .left{gap:clamp(8px,1.2svh,20px)}
+  #capabilities .sec-head .h1{font-size:clamp(36px,min(5.2vw,7.2svh),96px);line-height:1.02}
+  #capabilities .sec-head .bl{font-size:clamp(14px,min(1.04vw,2.1svh),18px);line-height:1.4}
+  #capabilities .ini{min-height:min(480px,max(200px,calc(100svh - 500px)));padding:clamp(16px,2svh,32px);gap:clamp(8px,1.4svh,14px)}
+  #capabilities .ini .h4{font-size:clamp(18px,2.4svh,28px);line-height:1.2}
+  #capabilities .ini .bm{font-size:clamp(13px,1.7svh,16px);line-height:1.35}
+  #capabilities .stats{gap:clamp(10px,1.8svh,28px) 20px}
+  #capabilities .stats .h2{font-size:clamp(26px,min(3.33vw,4.6svh),56px)}
+}
+@media (min-width:901px) and (max-height:820px){
+  #capabilities .hist-pin{padding-block:84px 12px;gap:12px}
+  #capabilities .sec-head .h1{font-size:clamp(28px,6svh,48px)}
+  #capabilities .sec-head .bl{font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  #capabilities .ini{min-height:min(280px,max(160px,calc(100svh - 360px)));padding:14px}
+  #capabilities .stats .h2{font-size:clamp(22px,4.2svh,36px)}
+}
+
 /* keep the map tag inside the screen on narrow widths */
 @media (max-width:700px){.rm-tag{transform:translate(calc(-100% + 8px),-210%)}}

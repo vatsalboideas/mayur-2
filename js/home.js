@@ -29,7 +29,7 @@ $$('[data-img]').forEach(el => {
 /* brand logos from Figma, when exported */
 [['footer .logo','logo-footer.svg']].forEach(([sel,file]) => {
   const im = new Image(); im.alt = 'Mayur Uniquoters';
-  im.onload = () => { const a = $(sel); a.innerHTML = ''; im.style.height = sel[0]==='#' ? '48px' : '90px'; im.style.width = 'auto'; a.appendChild(im); };
+  im.onload = () => { const a = $(sel); a.innerHTML = ''; im.style.height = '64px'; im.style.width = 'auto'; a.appendChild(im); };
   im.src = IMG_DIR + file;
 });
 
@@ -260,10 +260,11 @@ $$('.about-imgs .ph').forEach((el, i) => {
   gsap.to(el, { yPercent: +el.dataset.speed * -1.6, ease: 'none', scrollTrigger: { trigger: '.about-imgs', start: 'top bottom', end: 'bottom top', scrub: true } });
 });
 
-/* ---------- vision / mission / values sticky ---------- */
+/* ---------- vision / mission sticky ---------- */
 const mm = gsap.matchMedia();
 mm.add('(min-width: 1101px)', () => {
   const slides = $$('.split .slide'), btns = $$('.split-list button'), layers = $$('.split-img .layer');
+  const n = slides.length;
   gsap.set(slides, { opacity: 0, y: 30 }); gsap.set(slides[0], { opacity: 1, y: 0 });
   let cur = 0;
   const go = i => { if (i === cur) return;
@@ -274,15 +275,15 @@ mm.add('(min-width: 1101px)', () => {
     gsap.fromTo(slides[i], { opacity: 0, y: 24 * dir }, { opacity: 1, y: 0, duration: .6, delay: .28, ease: 'power3.out' });
     layers.forEach((l, k) => gsap.to(l, { clipPath: k <= i ? 'inset(0% 0 0 0)' : 'inset(100% 0 0 0)', duration: 1.1, ease: 'expo.inOut', overwrite: true }));
     btns.forEach((b, k) => b.classList.toggle('on', k === i));
-    $('#splitCount').textContent = `0${i + 1} / 03`; };
+    $('#splitCount').textContent = `0${i + 1} / 0${n}`; };
   const st = ScrollTrigger.create({ trigger: '.split', start: 'top top', end: 'bottom bottom', pin: '.split-pin', pinSpacing: false,
-    onUpdate: s => go(Math.min(2, Math.floor(s.progress * 3))) });
-  btns.forEach((b, i) => b.addEventListener('click', () => { const y = st.start + (st.end - st.start) * (i + .5) / 3; lenis ? lenis.scrollTo(y, { duration: 1.2 }) : scrollTo({ top: y, behavior: 'smooth' }); }));
+    onUpdate: s => go(Math.min(n - 1, Math.floor(s.progress * n))) });
+  btns.forEach((b, i) => b.addEventListener('click', () => { const y = st.start + (st.end - st.start) * (i + .5) / n; lenis ? lenis.scrollTo(y, { duration: 1.2 }) : scrollTo({ top: y, behavior: 'smooth' }); }));
   return () => { gsap.set(slides, { clearProps: 'all' }); gsap.set(layers, { clearProps: 'clipPath' }); };
 });
 
 /* values stagger */
-gsap.from('.val > *:not(.rule)', { y: 40, opacity: 0, duration: 1, stagger: .04, ease: 'power3.out', scrollTrigger: { trigger: '.val-grid', start: 'top 85%' } });
+gsap.from('.val > *:not(.rule)', { y: 40, opacity: 0, duration: 1, stagger: .04, ease: 'power3.out', clearProps: 'transform', scrollTrigger: { trigger: '.val-grid', start: 'top 85%' } });
 
 /* ---------- history: horizontal pinned scroll ---------- */
 mm.add('(min-width: 901px)', () => {
@@ -308,9 +309,6 @@ mm.add('(min-width: 901px)', () => {
   hp.addEventListener('pointerenter', () => cur.classList.add('big')); hp.addEventListener('pointerleave', () => cur.classList.remove('big'));
 });
 
-/* ---------- founder ---------- */
-gsap.fromTo('.founder .bg', { yPercent: -8, scale: 1.15 }, { yPercent: 8, scale: 1, ease: 'none', scrollTrigger: { trigger: '.founder', start: 'top bottom', end: 'bottom top', scrub: true } });
-
 /* ---------- board ---------- */
 gsap.from('.bm-card', { y: 90, opacity: 0, duration: 1.3, stagger: .09, ease: 'expo.out', scrollTrigger: { trigger: '#boardRow', start: 'top 88%' } });
 
@@ -325,8 +323,6 @@ $$('.cert').forEach((c, i) => {
 });
 
 /* ---------- investors ---------- */
-gsap.to('#invImg', { clipPath: 'inset(0% 0% 0% 0% round 20px)', ease: 'none', scrollTrigger: { trigger: '#invImg', start: 'top 90%', end: 'top 25%', scrub: true } });
-gsap.fromTo('#invImg .inner', { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '#invImg', start: 'top bottom', end: 'bottom top', scrub: true } });
 
 /* ---------- footer ---------- */
 const fl = $('.foot-line'); fl.innerHTML = fl.textContent.split(' ').map(w => `<span class="line-mask" style="display:inline-block"><span style="display:inline-block">${w}</span></span>`).join(' ');

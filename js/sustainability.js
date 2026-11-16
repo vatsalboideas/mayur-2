@@ -20,7 +20,7 @@ $$('img[data-logo]').forEach(im => {
 /* brand logos from Figma */
 [['footer .logo','logo-footer.svg']].forEach(([sel,file]) => {
   const im = new Image(); im.alt = 'Mayur Uniquoters';
-  im.onload = () => { const a = $(sel); a.innerHTML = ''; im.style.height = sel[0]==='#' ? '48px' : '90px'; im.style.width = 'auto'; a.appendChild(im); };
+  im.onload = () => { const a = $(sel); a.innerHTML = ''; im.style.height = '64px'; im.style.width = 'auto'; a.appendChild(im); };
   im.src = IMG_DIR + file;
 });
 

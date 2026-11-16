@@ -538,7 +538,7 @@ section {
 .hero {
   --t-font: clamp(40px, min(6.4vw, 9vh), 120px);
   --t-top: clamp(96px, 13vh, 170px);
-  --t-gap: 2.5;
+  --t-gap: 3;
   min-height: max(720px, 100svh);
   padding-top: var(--t-top);
   padding-bottom: 40px;
@@ -550,7 +550,8 @@ section {
 .hero .display {
   position: relative;
   z-index: 3;
-  font-size: var(--t-font)
+  font-size: var(--t-font);
+  line-height: 1.08
 }
 
 .hero .display .line-mask {
@@ -750,7 +751,7 @@ section {
   .hero {
     --t-font: clamp(30px, 8.2vw, 56px);
     --t-top: 104px;
-    --t-gap: 3.1;
+    --t-gap: 3.6;
     min-height: max(580px, 76svh)
   }
 
@@ -784,9 +785,15 @@ section {
 
 .about-top {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1000px);
-  gap: 48px 64px;
+  /* title track stays at least as wide as “About”, so it can’t slide under the paragraph */
+  grid-template-columns: minmax(min-content, 0.42fr) minmax(0, 1fr);
+  gap: 40px clamp(28px, 4vw, 80px);
+  align-items: start;
   margin-top: 48px
+}
+
+.about-top .h1 {
+  max-width: 5.6em
 }
 
 .about .stmt .w {
@@ -827,7 +834,7 @@ section {
 
 /* 03 sticky split */
 .split {
-  height: 300vh
+  height: 200vh
 }
 
 .split-pin {
@@ -982,11 +989,21 @@ section {
   object-fit: contain;
   object-position: left center;
   margin-block: 40px 24px;
-  transition: transform .6s cubic-bezier(.2, .7, .2, 1)
+  transition: transform .45s cubic-bezier(.2, .7, .2, 1)
 }
 
 .val:hover .vi {
-  transform: translateY(-6px)
+  transform: translateY(-3px) scale(1.04)
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .val .vi {
+    transition: none
+  }
+
+  .val:hover .vi {
+    transform: none
+  }
 }
 
 @media (max-width:1100px) {
@@ -1112,16 +1129,21 @@ section {
 
 /* 06 founder */
 .founder {
-  height: max(760px, 110vh);
+  position: relative;
+  height: auto;
   overflow: hidden;
-  color: var(--cream)
+  color: var(--cream);
+  background: #191516;
+  scroll-margin-top: 96px
 }
 
 .founder .bg {
-  position: absolute;
-  inset: -12% 0;
-  background: #2a2526 center/cover no-repeat;
-  will-change: transform
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center top
 }
 
 .founder .shade {
@@ -1131,7 +1153,8 @@ section {
 }
 
 .founder .content {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
   height: 100%;
   display: grid;
@@ -1151,9 +1174,13 @@ section {
 
 @media (max-width:900px) {
   .founder .content {
+    position: relative;
+    inset: auto;
+    height: auto;
     grid-template-columns: minmax(0,1fr);
-    align-items: end;
-    padding-bottom: 80px
+    align-items: start;
+    padding-top: 32px;
+    padding-bottom: 48px
   }
 
   .founder .shade {
@@ -1354,6 +1381,21 @@ section {
   background-position: center
 }
 
+#investors .inv-img {
+  aspect-ratio: auto;
+  height: auto;
+  clip-path: none;
+  overflow: hidden
+}
+
+#investors .inv-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center top
+}
+
 .inv-copy {
   display: flex;
   flex-direction: column;
@@ -1467,8 +1509,8 @@ section {
 footer {
   color: var(--cream);
   background: var(--maroon);
-  padding-top: 64px;
-  padding-bottom: max(36px, env(safe-area-inset-bottom, 0px))
+  padding-top: 40px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom, 0px))
 }
 
 .foot-top {
@@ -1505,7 +1547,7 @@ footer {
 }
 
 .foot-line {
-  margin-top: clamp(80px, 8vw, 140px);
+  margin-top: clamp(36px, 4vw, 64px);
   font-size: var(--h2);
   line-height: 1.05;
   letter-spacing: -.025em;
@@ -1517,8 +1559,8 @@ footer {
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
-  margin-top: 36px;
-  padding-top: 28px;
+  margin-top: 24px;
+  padding-top: 18px;
   border-top: 1px solid rgba(244, 238, 230, .2);
   font-size: 16px
 }
@@ -2009,4 +2051,150 @@ header.site,
 .foot-col a[href^="tel:"],
 .foot-col a[href^="mailto:"] {
   width: fit-content
+}
+
+/* ---- responsive hardening: buttons may wrap instead of overflowing their column ---- */
+.btn {
+  max-width: 100%
+}
+
+.cta .btn,
+.inv-copy .cta .btn {
+  white-space: normal;
+  height: auto;
+  min-height: 48px;
+  padding-block: 12px;
+  line-height: 1.3
+}
+
+@media (max-width:640px) {
+  .btn {
+    white-space: normal;
+    height: auto;
+    min-height: 48px;
+    padding-block: 12px;
+    line-height: 1.3
+  }
+}
+
+/* two-column image + copy: give the copy column room on mid-size screens */
+@media (min-width:901px) and (max-width:1400px) {
+  .inv-grid {
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1fr)
+  }
+}
+
+/* ---- home hero: phone layout — headline on top, furniture fits the width, footer row never touches the pictures (additive) ---- */
+@media (max-width:700px) {
+  .hero {
+    min-height: max(620px, 78svh);
+    /* room under the 3-line title; 0.353 maps that height to a sofa width past the cutout's empty top */
+    --hero-h: max(620px, 78svh);
+    --title-end: calc(var(--t-top) + 3.4 * var(--t-font));
+    --stage: calc(var(--hero-h) - var(--title-end) - 160px)
+  }
+
+  .hero-dots {
+    bottom: 104px
+  }
+
+  .hero-slide .lyr {
+    bottom: 150px
+  }
+
+  .cut.sofa {
+    width: min(92vw, calc(var(--stage) / 0.353));
+    left: 4vw;
+    bottom: 150px
+  }
+
+  .cut.plant {
+    width: 24vw;
+    right: 2vw;
+    bottom: 150px
+  }
+
+  .cut.table {
+    width: min(22vw, calc(var(--stage) * 0.85));
+    left: 2vw;
+    bottom: clamp(150px, calc(var(--hero-h) - var(--title-end) - 16px - min(22vw, var(--stage) * 0.85)), calc(150px + 11vw))
+  }
+
+  .cut.car {
+    width: min(234.6cqh, 100cqw);
+    left: 0;
+    right: auto
+  }
+
+  .cut.box1 {
+    left: 4cqw;
+    top: 0;
+    width: min(30cqw, 34cqh)
+  }
+
+  .cut.box2 {
+    left: 38cqw;
+    top: 16cqh;
+    width: min(40cqw, 40cqh)
+  }
+
+  .hero-foot {
+    align-items: flex-end
+  }
+
+  .hero-foot .scroll .rule {
+    width: min(160px, 40vw)
+  }
+}
+
+/* ---- home hero: tablet portrait (701-900px) — pictures sit inside the screen, clear of the footer row ---- */
+@media (min-width:701px) and (max-width:900px) {
+  .hero {
+    --sw: min(84vw, calc((max(720px, 100svh) - 440px) * 1.283));
+    min-height: max(720px, 100svh)
+  }
+
+  .hero-dots {
+    bottom: 104px
+  }
+
+  .hero-slide .lyr {
+    bottom: 140px
+  }
+
+  .cut.sofa {
+    width: var(--sw);
+    left: calc((100vw - var(--sw)) / 2);
+    bottom: 140px
+  }
+
+  .cut.plant {
+    width: calc(var(--sw) * .26);
+    right: calc((100vw - var(--sw)) / 2 - 2vw);
+    bottom: 140px
+  }
+
+  .cut.table {
+    width: calc(var(--sw) * .24);
+    left: calc((100vw - var(--sw)) / 2 - 2vw);
+    bottom: calc(140px + var(--sw) * .12)
+  }
+
+  .cut.car {
+    width: min(234.6cqh, 100cqw);
+    left: 0;
+    right: auto
+  }
+
+  .cut.box1 {
+    left: 4cqw;
+    top: 2cqh;
+    width: min(24cqw, 34cqh)
+  }
+
+  .cut.box2 {
+    left: 32cqw;
+    top: 14cqh;
+    width: min(32cqw, 40cqh)
+  }
 }
