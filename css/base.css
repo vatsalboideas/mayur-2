@@ -1950,10 +1950,21 @@ body.home .mobile-nav {
   padding-right: var(--cpad)
 }
 
-/* ---- home: Vision / Mission / Values — one shared top line; counter sits on the picture's bottom edge (additive) ---- */
+/* ---- home: Vision / Mission — columns keep one shared top line and the
+   counter stays on the picture's bottom edge. The row itself is centered
+   in the viewport below the fixed header (additive) ---- */
 #split .split-pin {
   align-items: start;
   align-content: start
+}
+
+@media (min-width: 1101px) {
+  #split .split-pin {
+    align-content: center;
+    /* 96px top padding clears the header; 0 bottom lets the leftover
+       space split evenly between the header and the viewport bottom */
+    padding-bottom: 0
+  }
 }
 
 #split .split-list {
